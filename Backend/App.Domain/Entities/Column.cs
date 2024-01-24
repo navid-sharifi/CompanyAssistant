@@ -1,6 +1,9 @@
 ﻿namespace App.Domain.Entities
 {
-    public class Column
+    public class Column : BaseEntity
     {
+        public string Name { get; set; }
+        public int Order { get; set; }
+
     }
 }
