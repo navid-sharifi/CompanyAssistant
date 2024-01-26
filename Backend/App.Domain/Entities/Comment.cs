@@ -4,6 +4,7 @@
     {
         public CommentType Type { get; set; }
         public string Message { get; set; }
+        public string TaskId { get; set; }
     }
 
     public enum CommentType
