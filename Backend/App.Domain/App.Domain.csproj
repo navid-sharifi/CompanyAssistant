@@ -10,4 +10,8 @@
     <ProjectReference Include="..\App.Utility\App.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validation\" />
+  </ItemGroup>
+
 </Project>
