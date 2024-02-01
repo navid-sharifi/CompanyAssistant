@@ -1,4 +1,5 @@
 ﻿using App.Domain.Entities;
+using App.Utility.Extentions.String;
 
 namespace App.Domain.Validation
 {
@@ -6,11 +7,9 @@ namespace App.Domain.Validation
     {
         public UserValidator(User model) : base(model)
         {
-            if (model.Name.isnull)
-            {
+            if (model.Name.IsNullOrEmpty())
+                Add(nameof(model.Name), $"{nameof(model.Name)} can't be empty");
 
-            }
         }
-
     }
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace App.Utility.Extentions.String
+﻿namespace App.Utility.Extentions.String
 {
-    internal class StringExtentions
+    public static class StringExtentions
     {
+        public static bool IsNullOrEmpty(this string @this) => string.IsNullOrEmpty(@this);
     }
+
 }
