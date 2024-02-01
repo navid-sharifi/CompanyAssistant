@@ -17,10 +17,11 @@ namespace App.Domain.Validation
 
         protected void Add(string fieldName, string errorDescription)
         {
+
+
             var error = _errors.FirstOrDefault(c => c.field == fieldName);
             if (error.field is null)
-                _errors.Add(fieldName, new List<string>({ errorDescription });
-
+                _errors.Add((fieldName, new List<string> { errorDescription }));
             else
                 error.Errors.Add(errorDescription);
         }
