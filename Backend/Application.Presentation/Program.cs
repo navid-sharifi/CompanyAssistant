@@ -1,3 +1,6 @@
+using App.Domain.Validation;
+
+
 namespace Application.Presentation
 {
     public class Program
@@ -7,7 +10,7 @@ namespace Application.Presentation
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.AddAutoMapper(typeof(BaseValidator<>));
             builder.Services.AddControllers();
             var app = builder.Build();
             // Configure the HTTP request pipeline.
