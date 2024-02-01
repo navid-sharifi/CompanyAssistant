@@ -37,5 +37,3 @@ namespace App.Domain.Validation
         public bool IsValid();
     }
 }
-
-
