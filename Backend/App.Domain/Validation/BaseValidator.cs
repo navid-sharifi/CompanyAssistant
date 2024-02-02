@@ -11,8 +11,8 @@ namespace App.Domain.Validation
         protected BaseValidator(T model)
         {
             _model = model;
-            if (string.IsNullOrEmpty(_model.Id))
-                Add(nameof(model.Id), $"{nameof(model.Id)} can't be empty.");
+            if (string.IsNullOrEmpty(_model._id))
+                Add(nameof(model._id), $"{nameof(model._id)} can't be empty.");
         }
 
         protected void Add(string fieldName, string errorDescription)
