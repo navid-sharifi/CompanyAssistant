@@ -22,4 +22,8 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Database\MongoDb\Repository\" />
+  </ItemGroup>
+
 </Project>
