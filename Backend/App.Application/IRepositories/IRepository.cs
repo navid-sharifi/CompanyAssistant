@@ -1,5 +1,5 @@
 ﻿
-namespace App.Application.IRepository
+namespace App.Application.IRepositories
 {
     using App.Domain.Entities;
     using System.Linq.Expressions;

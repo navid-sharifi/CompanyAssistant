@@ -1,5 +1,4 @@
-﻿
-using App.Application.IRepository;
+﻿using App.Application.IRepositories;
 using App.Domain.Entities;
 using MongoDB.Driver;
 using System.Linq.Expressions;
