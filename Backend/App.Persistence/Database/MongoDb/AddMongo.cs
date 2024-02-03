@@ -12,6 +12,7 @@ namespace App.Persistence.Database.MongoDb
         {
             services.AddScoped<IMongoDatabase>(options =>
             {
+
                 var mongoSettings = configuration.GetSection("MongoDBSettings").Get<MongoDBSettings>();
                 var serviceSettings = configuration.GetSection("ServiceSettings").Get<ServiceSettings>();
 

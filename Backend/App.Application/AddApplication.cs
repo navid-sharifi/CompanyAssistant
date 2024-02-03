@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using App.Application.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Application
 {
@@ -7,9 +9,10 @@ namespace App.Application
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAutoMapper(typeof(AddApplicationExtention));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddApplicationExtention).Assembly));
 
+            services.AddScoped(typeof(BaseService<>), typeof(BaseService<>));
             return services;
         }
-
     }
 }

@@ -1,24 +1,28 @@
 ﻿using App.Application.MediatR.User;
 using App.Application.ViewModels.User.ViewModels;
+using App.Domain.Entities;
+using AutoMapper;
 using MediatR;
+using Task = System.Threading.Tasks.Task;
 
 namespace App.Application.Services
 {
-    public class UserServices
-    {
-        private IMediator _mediator;
 
-        public UserServices(IMediator mediator)
+    public class UserServices : BaseService<User>
+    {
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+
+        public UserServices(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
-        public async Task AddUser(AddNewUserDto NewUserDto)
+        public Task AddUser(AddNewUserDto NewUserDto)
         {
-
-            await _mediator.Send(new AddUserRequest());
-
+            return _mediator.Send(_mapper.Map<AddUserRequest>(NewUserDto));
         }
     }
-
 }
+
