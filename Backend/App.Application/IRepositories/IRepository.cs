@@ -15,5 +15,4 @@ namespace App.Application.IRepositories
         Task<T?> GetAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default(CancellationToken));
         Task UpdateAsync(T entity, CancellationToken cancellationToken = default(CancellationToken));
     }
-
 }
