@@ -4,8 +4,9 @@ namespace App.Application.MediatR.User
 {
     public class AddUserRequest : IRequest
     {
-
+        public string Name { get; set; }
     }
+
 
     public class AddUserHandler : IRequestHandler<AddUserRequest>
     {
