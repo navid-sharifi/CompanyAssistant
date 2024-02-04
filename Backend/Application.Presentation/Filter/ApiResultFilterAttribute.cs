@@ -5,7 +5,6 @@ namespace Application.Presentation.Filter
 {
     public class ApiResultFilterAttribute : ActionFilterAttribute
     {
-
         public override void OnResultExecuting(ResultExecutingContext context)
         {
             if (context.Result is OkObjectResult okObjectResult)

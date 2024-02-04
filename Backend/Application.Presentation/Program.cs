@@ -16,7 +16,6 @@ namespace Application.Presentation
 
             builder.Services.AddMongoDb(configuration);
             builder.Services.AddApplication(configuration);
-
             builder.Services.AddControllers();
 
             var app = builder.Build();
