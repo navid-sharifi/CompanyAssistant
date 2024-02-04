@@ -8,12 +8,12 @@ using Task = System.Threading.Tasks.Task;
 namespace App.Application.Services
 {
 
-    public class UserServices : BaseService<User>
+    public class UserService : BaseService<User>
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public UserServices(IMediator mediator, IMapper mapper)
+        public UserService(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
