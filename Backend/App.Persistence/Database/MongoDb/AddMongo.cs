@@ -1,5 +1,7 @@
 ﻿using App.Application.Config.Models;
+using App.Application.IRepositories;
 using App.Persistence.Database.MongoDb.ConfigModel;
+using App.Persistence.Database.MongoDb.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
@@ -24,6 +26,7 @@ namespace App.Persistence.Database.MongoDb
                 return client.GetDatabase(serviceSettings.ServiceName);
             });
 
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             return services;
         }
     }

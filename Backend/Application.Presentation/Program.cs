@@ -1,5 +1,6 @@
 using App.Application;
 using App.Persistence.Database.MongoDb;
+using Application.Presentation.Middlewares;
 
 
 namespace Application.Presentation
@@ -20,6 +21,7 @@ namespace Application.Presentation
 
             var app = builder.Build();
             // Configure the HTTP request pipeline.
+            app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();

@@ -54,6 +54,12 @@ namespace Application.Presentation.Filter
                 var apiResult = new ApiResult<object>(true, ApiResultStatusCode.Success, objectResult.Value);
                 context.Result = new JsonResult(apiResult) { StatusCode = objectResult.StatusCode };
             }
+            else if (context.Result is ObjectResult objectResult2 && objectResult2.StatusCode == 415
+                && !(objectResult2.Value is ApiResult))
+            {
+                var apiResult = new ApiResult<object>(true, ApiResultStatusCode.BadRequest, objectResult2.Value);
+                context.Result = new JsonResult(apiResult) { StatusCode = objectResult2.StatusCode };
+            }
 
             base.OnResultExecuting(context);
         }
