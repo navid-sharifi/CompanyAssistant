@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Application.Presentation.Filter.model
+namespace Application.Presentation.Filter
 {
     public enum ApiResultStatusCode
     {

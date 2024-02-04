@@ -1,9 +1,9 @@
 ﻿
 using App.Utility.Extentions;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-
-namespace Application.Presentation.Filter.model
+namespace Application.Presentation.Filter
 {
     public class ApiResult
     {
