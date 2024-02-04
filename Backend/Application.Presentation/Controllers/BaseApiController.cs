@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Presentation.Filter;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Presentation.Controllers
 {
     [Route("api/[controller]")]
+    [ApiResultFilter]
     [ApiController]
-    public class BaseApiController : ControllerBase
+    public abstract class BaseApiController : ControllerBase
     {
+
     }
 }

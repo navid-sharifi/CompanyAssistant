@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Presentation.Controllers.User
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
+
+
+    public class UserController : BaseApiController
     {
 
         public UserService _userServices { get; }
