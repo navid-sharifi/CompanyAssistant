@@ -23,9 +23,9 @@ namespace Application.Presentation.Controllers.User
         }
 
         [HttpGet]
-        public Task Get(AddNewUserDto model)
+        public Task Get()
         {
-            return _userServices.AddUser(model);
+            return _userServices.GetAll();
         }
 
         [HttpGet]

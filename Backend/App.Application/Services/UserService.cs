@@ -24,9 +24,9 @@ namespace App.Application.Services
             return _mediator.Send(_mapper.Map<AddUserRequest>(NewUserDto));
         }
 
-        public Task GetAll()
+        public Task<IList<GetUserDto>> GetAll()
         {
-            return _mediator.Send();
+            return _mediator.Send(new GetAllUserRequest());
         }
 
     }
