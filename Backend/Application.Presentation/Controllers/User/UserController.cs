@@ -23,18 +23,18 @@ namespace Application.Presentation.Controllers.User
         }
 
         [HttpGet]
-        public Task Get()
+        public Task<IList<GetUserDto>> Get()
         {
             return _userServices.GetAll();
         }
 
-        [HttpGet]
-        [Route("{Id}")]
-        public Task GetOne(string id)
-        {
-            return Task.CompletedTask;
-            return _userServices.AddUser(model);
-        }
+        //[HttpGet]
+        //[Route("{id}")]
+        //public Task GetOne(string id)
+        //{
+        //    return Task.CompletedTask;
+        //    return _userServices.AddUser(model);
+        //}
 
     }
 }
