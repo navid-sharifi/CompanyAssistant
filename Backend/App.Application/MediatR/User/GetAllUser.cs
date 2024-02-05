@@ -1,15 +1,16 @@
 ﻿using App.Application.IRepositories;
+using App.Application.ViewModels.User.ViewModels;
 using AutoMapper;
 using MediatR;
 
 namespace App.Application.MediatR.User
 {
-    public class GetAllUserRequest : IRequest
+    public class GetAllUserRequest : IRequest<IList<GetUserDto>>
     {
 
     }
 
-    public class GetAllUserHandler : IRequestHandler<GetAllUserRequest>
+    public class GetAllUserHandler : IRequestHandler<GetAllUserRequest, IList<GetUserDto>>
     {
         public GetAllUserHandler(IUserRepository repository, IMapper mapper)
         {
@@ -20,9 +21,9 @@ namespace App.Application.MediatR.User
         private readonly IUserRepository _repo;
         private readonly IMapper mapper;
 
-        public Task Handle(GetAllUserRequest request, CancellationToken cancellationToken)
+        public Task<IList<GetUserDto>> Handle(GetAllUserRequest request, CancellationToken cancellationToken)
         {
-            return _repo.CreateAsync(mapper.Map<App.Domain.Entities.User>(request));
+            return _repo.GetAllAsync<GetUserDto>();
         }
     }
 }

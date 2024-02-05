@@ -10,6 +10,7 @@ namespace App.Application.IRepositories
         Task CreateAsync(T entity);
         Task DeleteAsync(string id);
         Task<IList<T>> GetAllAsync();
+        Task<IList<TDto>> GetAllAsync<TDto>();
         Task<IReadOnlyCollection<T>> GetAllAsync(Expression<Func<T, bool>> filter);
         Task<T?> GetAsync(string id, CancellationToken cancellationToken = default(CancellationToken));
         Task<T?> GetAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default(CancellationToken));
