@@ -9,6 +9,7 @@ namespace App.Application.ViewModels.User.Mappers
         public UserProfiler()
         {
             CreateMap<Domain.Entities.User, AddUserRequest>().ReverseMap();
+            CreateMap<Domain.Entities.User, GetUserDto>().ReverseMap();
             CreateMap<AddUserRequest, AddNewUserDto>().ReverseMap();
         }
     }
