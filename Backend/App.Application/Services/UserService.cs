@@ -23,6 +23,12 @@ namespace App.Application.Services
         {
             return _mediator.Send(_mapper.Map<AddUserRequest>(NewUserDto));
         }
+
+        public Task GetAll()
+        {
+            return _mediator.Send();
+        }
+
     }
 }
 

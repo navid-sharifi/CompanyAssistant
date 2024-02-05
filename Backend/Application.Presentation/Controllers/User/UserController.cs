@@ -22,5 +22,19 @@ namespace Application.Presentation.Controllers.User
             return _userServices.AddUser(model);
         }
 
+        [HttpGet]
+        public Task Get(AddNewUserDto model)
+        {
+            return _userServices.AddUser(model);
+        }
+
+        [HttpGet]
+        [Route("{Id}")]
+        public Task GetOne(string id)
+        {
+            return Task.CompletedTask;
+            return _userServices.AddUser(model);
+        }
+
     }
 }
