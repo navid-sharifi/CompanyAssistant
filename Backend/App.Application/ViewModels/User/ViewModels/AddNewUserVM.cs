@@ -8,6 +8,7 @@
     public class GetUserDto
     {
         public string Name { get; set; }
+        public string _id { get; set; }
     }
 
 }

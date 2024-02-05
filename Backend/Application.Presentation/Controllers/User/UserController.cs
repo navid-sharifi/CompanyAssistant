@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Presentation.Controllers.User
 {
-
-
     public class UserController : BaseApiController
     {
 
@@ -28,13 +26,13 @@ namespace Application.Presentation.Controllers.User
             return _userServices.GetAll();
         }
 
-        //[HttpGet]
-        //[Route("{id}")]
-        //public Task GetOne(string id)
-        //{
-        //    return Task.CompletedTask;
-        //    return _userServices.AddUser(model);
-        //}
+        [HttpGet]
+        [Route("{id}")]
+        public Task GetOne(Guid id)
+        {
+            return Task.CompletedTask;
+            //return _userServices.AddUser(model);
+        }
 
     }
 }
