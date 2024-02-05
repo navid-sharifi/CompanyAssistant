@@ -1,6 +1,7 @@
 ﻿using App.Application.IRepositories;
 using App.Domain.Entities;
 using App.Domain.Validation;
+using AutoMapper;
 using MongoDB.Driver;
 using System.Data;
 using System.Linq.Expressions;
@@ -13,10 +14,12 @@ namespace App.Persistence.Database.MongoDb.Repository
     {
         private readonly IMongoCollection<T> dbCollection;
         private readonly FilterDefinitionBuilder<T> filterBuilder = Builders<T>.Filter;
+        private readonly IMapper mapper;
 
-        public Repository(IMongoDatabase db)
+        public Repository(IMongoDatabase db, IMapper mapper)
         {
             dbCollection = db.GetCollection<T>(typeof(T).Name);
+            this.mapper = mapper;
         }
 
 
@@ -114,6 +117,11 @@ namespace App.Persistence.Database.MongoDb.Repository
             return await dbCollection.Find(filterBuilder.Empty).ToListAsync();
         }
 
+        public async Task<IList<TDto>> GetAllAsync<TDto>()
+        {
+            var list = await dbCollection.Find(filterBuilder.Empty).ToListAsync();
+            return list.Select(c => mapper.Map<TDto>(c)).ToArray();
+        }
         public async Task<IReadOnlyCollection<T>> GetAllAsync(Expression<Func<T, bool>> filter)
         {
             return await dbCollection.Find(filter).ToListAsync();
