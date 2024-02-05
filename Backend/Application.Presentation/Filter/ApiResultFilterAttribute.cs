@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Utility;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-
 namespace Application.Presentation.Filter
 {
     public class ApiResultFilterAttribute : ActionFilterAttribute
@@ -59,6 +59,11 @@ namespace Application.Presentation.Filter
             {
                 var apiResult = new ApiResult<object>(true, ApiResultStatusCode.BadRequest, objectResult2.Value);
                 context.Result = new JsonResult(apiResult) { StatusCode = objectResult2.StatusCode };
+            }
+            else if (context.Result is EmptyResult emptyResult)
+            {
+                var apiResult = new ApiResult(true, ApiResultStatusCode.Success);
+                context.Result = new JsonResult(apiResult) { StatusCode = 200 };
             }
 
             base.OnResultExecuting(context);

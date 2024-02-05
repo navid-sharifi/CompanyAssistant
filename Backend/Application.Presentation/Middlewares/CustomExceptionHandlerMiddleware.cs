@@ -1,8 +1,8 @@
-﻿using Application.Presentation.Filter;
-using Newtonsoft.Json;
+﻿using App.Domain.Validation;
+using App.Utility;
+using Application.Presentation.Filter;
 using System.Net;
-
-
+using System.Text.Json;
 
 
 namespace Application.Presentation.Middlewares
@@ -60,14 +60,30 @@ namespace Application.Presentation.Middlewares
                         dic.Add("InnerException.StackTrace", exception.InnerException.StackTrace);
                     }
                     if (exception.AdditionalData != null)
-                        dic.Add("AdditionalData", JsonConvert.SerializeObject(exception.AdditionalData));
+                        dic.Add("AdditionalData", JsonSerializer.Serialize(exception.AdditionalData));
 
-                    message = JsonConvert.SerializeObject(dic);
+                    message = JsonSerializer.Serialize(dic);
                 }
                 else
                 {
                     message = exception.Message;
                 }
+                await WriteToResponseAsync();
+            }
+            catch (EntityNotValidException exception)
+            {
+                _logger.LogError(exception, exception.Message);
+
+                var dic = new Dictionary<string, string>
+                {
+                    ["Exception"] = exception.Message,
+                    ["Detail"] = Newtonsoft.Json.JsonConvert.SerializeObject(exception.AdditionalData),
+                    //["IsSuccess"] = false.ToString(),
+                    //["StatusCode"] = ApiResultStatusCode.ServerError.ToString()
+                };
+
+                message = JsonSerializer.Serialize(dic);
+
                 await WriteToResponseAsync();
             }
 
@@ -94,10 +110,11 @@ namespace Application.Presentation.Middlewares
                         ["Exception"] = exception.Message,
                         ["StackTrace"] = exception.StackTrace,
                     };
-                    message = JsonConvert.SerializeObject(dic);
+                    message = JsonSerializer.Serialize(dic);
                 }
                 await WriteToResponseAsync();
             }
+
 
             async Task WriteToResponseAsync()
             {
@@ -105,7 +122,7 @@ namespace Application.Presentation.Middlewares
                     throw new InvalidOperationException("The response has already started, the http status code middleware will not be executed.");
 
                 var result = new ApiResult(false, apiStatusCode, message);
-                var json = JsonConvert.SerializeObject(result);
+                var json = JsonSerializer.Serialize(result);
 
                 context.Response.StatusCode = (int)httpStatusCode;
                 context.Response.ContentType = "application/json";

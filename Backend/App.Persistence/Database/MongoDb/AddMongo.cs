@@ -1,7 +1,7 @@
 ﻿using App.Application.Config.Models;
 using App.Application.IRepositories;
 using App.Persistence.Database.MongoDb.ConfigModel;
-using App.Persistence.Database.MongoDb.Repository;
+using App.Persistence.Repositoriess;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
@@ -12,7 +12,7 @@ namespace App.Persistence.Database.MongoDb
     {
         public static IServiceCollection AddMongoDb(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IMongoDatabase>(options =>
+            services.AddTransient<IMongoDatabase>(options =>
             {
 
                 var mongoSettings = configuration.GetSection("MongoDBSettings").Get<MongoDBSettings>();
@@ -26,7 +26,7 @@ namespace App.Persistence.Database.MongoDb
                 return client.GetDatabase(serviceSettings.ServiceName);
             });
 
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }
     }

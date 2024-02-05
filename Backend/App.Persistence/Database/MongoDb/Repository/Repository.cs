@@ -1,6 +1,8 @@
 ﻿using App.Application.IRepositories;
 using App.Domain.Entities;
+using App.Domain.Validation;
 using MongoDB.Driver;
+using System.Data;
 using System.Linq.Expressions;
 using Task = System.Threading.Tasks.Task;
 
@@ -77,10 +79,25 @@ namespace App.Persistence.Database.MongoDb.Repository
         //    await dbCollection.DeleteOneAsync(filter);
         //}
 
+        private bool IsValid(T entity)
+        {
+            var type = typeof(BaseEntity).Assembly.GetExportedTypes()
+                                 .Where(c => c.IsClass && !c.IsAbstract && c.IsPublic && c.BaseType == typeof(BaseValidator<T>)).FirstOrDefault();
+            if (type is null)
+                return true;
+
+            var validator = Activator.CreateInstance(type, entity) as IDomainValidator;
+
+            if (!validator.IsValid())
+                throw new EntityNotValidException("Not valid data", validator.GetErrors());
+
+            return true;
+        }
+
 
         public async Task CreateAsync(T entity)
         {
-            if (entity == null)
+            if (entity == null || !IsValid(entity))
                 throw new ArgumentNullException();
 
             await dbCollection.InsertOneAsync(entity);

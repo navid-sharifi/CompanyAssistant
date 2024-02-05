@@ -3,7 +3,7 @@ using App.Domain.Entities;
 using App.Persistence.Database.MongoDb.Repository;
 using MongoDB.Driver;
 
-namespace App.Infrastructure.Repositories
+namespace App.Persistence.Repositoriess
 {
     public class UserRepository : Repository<User>, IUserRepository
     {

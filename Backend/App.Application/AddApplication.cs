@@ -8,11 +8,9 @@ namespace App.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAutoMapper(typeof(AddApplicationExtention));
+            services.AddAutoMapper(typeof(AddApplicationExtention).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddApplicationExtention).Assembly));
-
             services.AddScoped<UserService, UserService>();
-
             return services;
         }
     }
