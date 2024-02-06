@@ -2,7 +2,6 @@ using App.Application;
 using App.Persistence.Database.MongoDb;
 using Application.Presentation.Middlewares;
 
-
 namespace Application.Presentation
 {
     public class Program

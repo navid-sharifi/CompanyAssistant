@@ -7,7 +7,6 @@ namespace App.Application.MediatR.User
 {
     public class GetAllUserRequest : IRequest<IList<GetUserDto>>
     {
-
     }
 
     public class GetAllUserHandler : IRequestHandler<GetAllUserRequest, IList<GetUserDto>>
