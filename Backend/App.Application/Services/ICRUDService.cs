@@ -2,7 +2,7 @@
 {
     public interface ICRUDService<TAddDto, TGet>
     {
-        public Task Add(TAddDto add);
+        public Task Add(TAddDto data);
 
         public Task Delete(string id);
 

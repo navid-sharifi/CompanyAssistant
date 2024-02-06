@@ -8,7 +8,7 @@ using Task = System.Threading.Tasks.Task;
 namespace App.Application.Services
 {
 
-    public class UserService : BaseService<User>
+    public class UserService : BaseService<User>, ICRUDService<AddNewUserDto, GetUserDto>
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
@@ -18,10 +18,24 @@ namespace App.Application.Services
             _mediator = mediator;
             _mapper = mapper;
         }
-
-        public Task AddUser(AddNewUserDto NewUserDto)
+        public Task Add(AddNewUserDto user)
         {
-            return _mediator.Send(_mapper.Map<AddUserRequest>(NewUserDto));
+            return _mediator.Send(_mapper.Map<AddUserRequest>(user));
+        }
+
+
+
+        public Task Delete(string id)
+        {
+            throw new NotImplementedException();
+
+            return _mediator.Send();
+        }
+
+
+        public GetUserDto Get(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<IList<GetUserDto>> GetAll()
@@ -29,6 +43,11 @@ namespace App.Application.Services
             return _mediator.Send(new GetAllUserRequest());
         }
 
+
+        public IList<GetUserDto> GetAll(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
