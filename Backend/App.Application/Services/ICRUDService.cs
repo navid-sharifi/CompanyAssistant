@@ -6,8 +6,8 @@
 
         public Task Delete(string id);
 
-        public TGet Get(string id);
+        public Task<TGet> Get(string id);
 
-        public IList<TGet> GetAll(string id);
+        public Task<IList<TGet>> GetAll();
     }
 }

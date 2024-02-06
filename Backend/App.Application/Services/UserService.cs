@@ -23,30 +23,18 @@ namespace App.Application.Services
             return _mediator.Send(_mapper.Map<AddUserRequest>(user));
         }
 
-
-
         public Task Delete(string id)
         {
-            throw new NotImplementedException();
-
-            return _mediator.Send();
+            return _mediator.Send(new DeleteUserRequest { Id = id });
         }
 
-
-        public GetUserDto Get(string id)
+        public Task<GetUserDto> Get(string id)
         {
-            throw new NotImplementedException();
+            return _mediator.Send(new GetUserRequest { Id = id });
         }
-
         public Task<IList<GetUserDto>> GetAll()
         {
             return _mediator.Send(new GetAllUserRequest());
-        }
-
-
-        public IList<GetUserDto> GetAll(string id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

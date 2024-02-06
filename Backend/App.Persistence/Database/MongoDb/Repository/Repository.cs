@@ -131,6 +131,11 @@ namespace App.Persistence.Database.MongoDb.Repository
         {
             return GetAsync(c => c._id == id, cancellationToken);
         }
+        public async Task<TDto> GetAsync<TDto>(string id, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var entity = await GetAsync(id, cancellationToken);
+            return mapper.Map<TDto>(entity);
+        }
 
         public async Task<T?> GetAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default(CancellationToken))
         {

@@ -26,9 +26,4 @@ namespace App.Application.MediatR.User
         }
     }
 
-
-
-
-
-
 }
