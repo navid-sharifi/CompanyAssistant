@@ -22,27 +22,27 @@ namespace Application.Presentation.Controllers
         }
 
         [HttpPost]
-        public Task Add(TAdd model)
+        public virtual Task Add(TAdd model)
         {
             return _service.Add(model);
         }
 
         [HttpGet]
-        public Task<IList<TGet>> Get()
+        public virtual Task<IList<TGet>> Get()
         {
             return _service.GetAll();
         }
 
         [HttpGet]
         [Route("{id}")]
-        public Task<TGet> GetOne(Guid id)
+        public virtual Task<TGet> GetOne(Guid id)
         {
             return _service.Get(id.ToString());
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public Task Delete(Guid id)
+        public virtual Task Delete(Guid id)
         {
             return _service.Delete(id.ToString());
         }
