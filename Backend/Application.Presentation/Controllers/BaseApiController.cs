@@ -1,5 +1,4 @@
 ﻿using App.Application.Services;
-using App.Application.ViewModels.User.ViewModels;
 using Application.Presentation.Filter;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,8 +12,7 @@ namespace Application.Presentation.Controllers
 
     }
 
-
-    public abstract class CRUDContriller<TService, TAdd> : ControllerBase where TService : ICRUDService<TAdd>
+    public abstract class CRUDContriller<TService, TAdd, TGet> : ControllerBase where TService : ICRUDService<TAdd, TGet>
     {
         public TService _service { get; }
 
@@ -24,23 +22,29 @@ namespace Application.Presentation.Controllers
         }
 
         [HttpPost]
-        public Task Add(AddNewUserDto model)
+        public Task Add(TAdd model)
         {
-            return _userServices.AddUser(model);
+            return _service.Add(model);
         }
 
         [HttpGet]
-        public Task<IList<GetUserDto>> Get()
+        public Task<IList<TGet>> Get()
         {
-            return _userServices.GetAll();
+            return _service.GetAll();
         }
 
         [HttpGet]
         [Route("{id}")]
-        public Task GetOne(Guid id)
+        public Task<TGet> GetOne(Guid id)
         {
-            return Task.CompletedTask;
-            //return _userServices.AddUser(model);
+            return _service.Get(id.ToString());
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public Task Delete(Guid id)
+        {
+            return _service.Delete(id.ToString());
         }
 
     }
