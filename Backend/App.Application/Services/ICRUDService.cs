@@ -4,5 +4,9 @@
     {
         public Task Add(TAddDto add);
 
+        public Task Delete(string id);
+
+        public Task Get(string id);
+
     }
 }
