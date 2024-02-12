@@ -12,7 +12,7 @@ namespace Application.Presentation.Controllers
 
     }
 
-    public abstract class CRUDContriller<TService, TAdd, TGet> : ControllerBase where TService : ICRUDService<TAdd, TGet>
+    public abstract class CRUDContriller<TService, TAdd, TGet> : BaseApiController where TService : ICRUDService<TAdd, TGet>
     {
         public TService _service { get; }
 
@@ -22,27 +22,29 @@ namespace Application.Presentation.Controllers
         }
 
         [HttpPost]
-        public virtual Task Add(TAdd model)
+        public Task Add(TAdd model)
         {
             return _service.Add(model);
         }
 
         [HttpGet]
-        public virtual Task<IList<TGet>> Get()
+        public async Task<IEnumerable<TGet>> User()
         {
-            return _service.GetAll();
+            var data = await _service.GetAll();
+            return data.Reverse();
         }
 
-        [HttpGet]
-        [Route("{id}")]
-        public virtual Task<TGet> GetOne(Guid id)
-        {
-            return _service.Get(id.ToString());
-        }
+
+        //[HttpGet]
+        //[Route("{id}")]
+        //public Task<TGet> GetOne(Guid id)
+        //{
+        //    return _service.Get(id.ToString());
+        //}
 
         [HttpDelete]
         [Route("{id}")]
-        public virtual Task Delete(Guid id)
+        public Task Delete(Guid id)
         {
             return _service.Delete(id.ToString());
         }
