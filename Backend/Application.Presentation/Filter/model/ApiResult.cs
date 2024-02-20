@@ -8,17 +8,17 @@ namespace Application.Presentation.Filter
 {
     public class ApiResult
     {
-        public bool IsSuccess { get; set; }
-        public ApiResultStatusCode StatusCode { get; set; }
+        public bool isSuccess { get; set; }
+        public ApiResultStatusCode statusCode { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string Message { get; set; }
+        public string message { get; set; }
 
         public ApiResult(bool isSuccess, ApiResultStatusCode statusCode, string message = null)
         {
-            IsSuccess = isSuccess;
-            StatusCode = statusCode;
-            Message = message ?? statusCode.ToDisplay();
+            this.isSuccess = isSuccess;
+            this.statusCode = statusCode;
+            this.message = message ?? statusCode.ToDisplay();
         }
 
         #region Implicit Operators

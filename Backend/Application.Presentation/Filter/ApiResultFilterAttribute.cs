@@ -24,13 +24,21 @@ namespace Application.Presentation.Filter
             }
             else if (context.Result is BadRequestObjectResult badRequestObjectResult)
             {
-                var message = badRequestObjectResult.Value.ToString();
+                var message = badRequestObjectResult.Value;
+
                 if (badRequestObjectResult.Value is SerializableError errors)
                 {
                     var errorMessages = errors.SelectMany(p => (string[])p.Value).Distinct();
                     message = string.Join(" | ", errorMessages);
                 }
-                var apiResult = new ApiResult(false, ApiResultStatusCode.BadRequest, message);
+
+                if (badRequestObjectResult.Value is Microsoft.AspNetCore.Mvc.ValidationProblemDetails validationProblemDetails)
+                {
+                    var errorMessages = validationProblemDetails.Errors.SelectMany(p => (string[])p.Value).Distinct();
+                    message = string.Join(" | ", errorMessages);
+                }
+
+                var apiResult = new ApiResult(false, ApiResultStatusCode.BadRequest, message.ToString());
                 context.Result = new JsonResult(apiResult) { StatusCode = badRequestObjectResult.StatusCode };
             }
             else if (context.Result is ContentResult contentResult)

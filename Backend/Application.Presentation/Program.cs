@@ -1,8 +1,8 @@
 using App.Application;
 using App.Persistence.Database.MongoDb;
+using App.Utility.Extentions.String;
 using Application.Presentation.Middlewares;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace Application.Presentation
 {
@@ -43,11 +43,10 @@ namespace Application.Presentation
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = true,
-                    //ValidateIssuerSigningKey = true,
+                    ValidateIssuerSigningKey = true,
                     ValidIssuer = "https://localhost:5001",
                     ValidAudience = "https://localhost:5001",
-
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKdfg345fedg453dfgfgfhey@34ssssss5"))
+                    IssuerSigningKey = new SymmetricSecurityKey(configuration.GetValue<string>("Authentication:Secret").ToBytes())
                 };
             });
 

@@ -1,5 +1,6 @@
 ﻿using App.Domain.Validation;
 using App.Utility;
+using App.Utility.Exceptions;
 using Application.Presentation.Filter;
 using System.Net;
 using System.Text.Json;
@@ -70,6 +71,16 @@ namespace Application.Presentation.Middlewares
                 }
                 await WriteToResponseAsync();
             }
+            catch (ValidationException exception)
+            {
+                //_logger.LogInformation(exception, exception.Message);
+                httpStatusCode = HttpStatusCode.BadRequest;
+                apiStatusCode = ApiResultStatusCode.LogicError;
+                message = exception.Message;
+
+                await WriteToResponseAsync();
+            }
+
             catch (EntityNotValidException exception)
             {
                 _logger.LogError(exception, exception.Message);
