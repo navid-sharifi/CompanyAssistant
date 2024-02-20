@@ -122,6 +122,13 @@ namespace App.Persistence.Database.MongoDb.Repository
             var list = await dbCollection.Find(filterBuilder.Empty).ToListAsync();
             return list.Select(c => mapper.Map<TDto>(c)).ToArray();
         }
+        public async Task<IList<TDto>> GetAllAsync<TDto>(Expression<Func<T, bool>> filter)
+        {
+            var list = await GetAllAsync(filter);
+            return list.Select(c => mapper.Map<TDto>(c)).ToArray();
+        }
+
+
         public async Task<IReadOnlyCollection<T>> GetAllAsync(Expression<Func<T, bool>> filter)
         {
             return await dbCollection.Find(filter).ToListAsync();
@@ -142,6 +149,11 @@ namespace App.Persistence.Database.MongoDb.Repository
             return await dbCollection.Find(filter).FirstOrDefaultAsync(cancellationToken);
         }
 
+        public async Task<TDto> GetAsync<TDto>(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default)
+        {
+            var entity = await GetAsync(filter, cancellationToken);
+            return mapper.Map<TDto>(entity);
+        }
         public async Task UpdateAsync(T entity, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (entity == null)
@@ -150,6 +162,8 @@ namespace App.Persistence.Database.MongoDb.Repository
             FilterDefinition<T> filter = filterBuilder.Eq(x => x._id, entity._id);
             await dbCollection.ReplaceOneAsync(filter, entity, cancellationToken: cancellationToken);
         }
+
+
     }
 
 }

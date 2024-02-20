@@ -11,6 +11,7 @@ namespace App.Application
             services.AddAutoMapper(typeof(AddApplicationExtention).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddApplicationExtention).Assembly));
             services.AddScoped<UserService, UserService>();
+            services.AddScoped<CompanyService, CompanyService>();
             return services;
         }
     }

@@ -16,6 +16,7 @@ namespace Application.Presentation
             configuration = builder.Configuration;
             // Add services to the container.
 
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -35,6 +36,8 @@ namespace Application.Presentation
             //});
 
             //builder.Services.AddAuthentication("Bearer").AddJwtBearer();
+
+            var dfdfd = configuration.GetValue<string>("Authentication:Secret");
 
             builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
             {

@@ -7,36 +7,54 @@ using App.Utility.Extentions.String;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Task = System.Threading.Tasks.Task;
 
-
-
 namespace App.Application.Services
 {
-
     public class UserService : BaseService<User>, ICRUDService<AddNewUserDto, GetUserDto>
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(IMediator mediator, IMapper mapper, IUserRepository userRepository, IConfiguration configuration)
+        public UserService(IMediator mediator, IMapper mapper, IUserRepository userRepository, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
             _mapper = mapper;
             _userRepository = userRepository;
             this.configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
+
         public Task Add(AddNewUserDto user)
         {
             return _mediator.Send(_mapper.Map<AddUserRequest>(user));
         }
+
+        public async Task Register(RegisterUserVM registerUser)
+        {
+
+            var user = await _userRepository.GetAsync(c => c.Email == registerUser.Email);
+            if (user is not null)
+                throw new ValidationException("This email used already.");
+
+            await _userRepository.CreateAsync(new User
+            {
+                Email = registerUser.Email,
+                Password = HashPassword(registerUser.Password),
+                Name = registerUser.Name,
+                Roles = "user"
+            });
+
+        }
+
 
         public Task Delete(string id)
         {
@@ -61,7 +79,7 @@ namespace App.Application.Services
             if (hashedPssword != user.Password)
                 throw new ValidationException("Email or Password is wrong.");
 
-            return GeneratToken();
+            return GeneratToken(user._id);
         }
 
         private string HashPassword(string password)
@@ -83,7 +101,8 @@ namespace App.Application.Services
             return storedPasswordHash;
         }
 
-        private string GeneratToken()
+
+        private string GeneratToken(string userId)
         {
             var secret = configuration.GetSection("Authentication").GetSection("Secret").Value;
 
@@ -92,7 +111,8 @@ namespace App.Application.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name,"Name"),
-                new Claim(ClaimTypes.Role, "User")
+                new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.Role, "user")
             };
             var tokeOptions = new JwtSecurityToken(
                 issuer: "https://localhost:5001",
@@ -105,6 +125,14 @@ namespace App.Application.Services
             return tokenString;
         }
 
+        public Task<GetUserDto> CurrentUser()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!userId.IsGuid())
+                throw new ValidationException("Token not valid");
+            return _userRepository.GetAsync<GetUserDto>(userId);
+
+        }
     }
 }
 
