@@ -39,7 +39,7 @@ namespace App.Application.Services
 
             return await _companyRepository.GetAllAsync<GetCompanyVM>(c => c.CreatorUserId == user._id);
         }
-        public async Task<GetCompanyVM> Get(string CompanyId)
+        public async Task<GetCompanyVM> GetCurrentUserCompany(string CompanyId)
         {
             var user = await _userService.CurrentUser();
             if (user is null)
@@ -50,12 +50,25 @@ namespace App.Application.Services
 
         public async Task Delete(string CompanyId)
         {
-            var compnay = await Get(CompanyId);
-            if (compnay is null)
+            var company = await GetCurrentUserCompany(CompanyId);
+            if (company is null)
                 throw new ValidationException("Compnay not found");
 
-            await _companyRepository.DeleteAsync(compnay._id);
+            await _companyRepository.DeleteAsync(company._id);
+        }
+
+        public async Task Update(UpdateCompanyVM updateCompany)
+        {
+            var user = await _userService.CurrentUser();
+            if (user is null)
+                throw new ValidationException("Not found current user.");
+
+            var company = await _companyRepository.GetAsync(c => c._id == updateCompany.Id.ToString() && c.CreatorUserId == user._id);
+            if (company is null)
+                throw new ValidationException("Compnay not found");
+            var newCompany = _mapper.Map(updateCompany, company);
+            await _companyRepository.UpdateAsync(newCompany);
         }
     }
-}
 
+}

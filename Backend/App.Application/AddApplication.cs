@@ -12,6 +12,7 @@ namespace App.Application
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddApplicationExtention).Assembly));
             services.AddScoped<UserService, UserService>();
             services.AddScoped<CompanyService, CompanyService>();
+            services.AddScoped<ProjectService, ProjectService>();
             return services;
         }
     }

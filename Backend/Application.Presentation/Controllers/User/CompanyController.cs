@@ -21,6 +21,13 @@ namespace Application.Presentation.Controllers.User
             return _companyService.Add(AddCompany);
         }
 
+        [HttpPut]
+        public Task Update([FromBody] UpdateCompanyVM updateCompany)
+        {
+            return _companyService.Update(updateCompany);
+        }
+
+
         [HttpGet]
         public Task<IList<GetCompanyVM>> GetAll()
         {
@@ -35,4 +42,5 @@ namespace Application.Presentation.Controllers.User
         }
 
     }
+
 }

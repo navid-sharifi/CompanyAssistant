@@ -28,6 +28,7 @@ namespace App.Persistence.Database.MongoDb
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
             return services;
         }
     }

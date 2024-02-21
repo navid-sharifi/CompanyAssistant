@@ -13,7 +13,7 @@ namespace App.Domain.Validation
         {
             _model = model;
 
-            if (_model._id.IsNullOrEmpty())
+            if (_model._id.IsNullOrEmpty() || !_model._id.IsGuid())
                 Add(nameof(model._id), $"{nameof(model._id)} can't be empty.");
         }
 

@@ -4,6 +4,8 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import UserAssistant from '../User/UserAssistant';
 import { UserContext } from '../../Contexts/UserContext';
 import { Http } from '../../Model/Enums/Http';
+import { useAppDispatch } from '../../Store/hooks';
+import { updateUserToken } from '../../Store/UserToken';
 
 
 interface Response<T> {
@@ -26,6 +28,11 @@ type RequestObject = AxiosRequestConfig & { url: string; method?: AxiosRequestCo
 export default function useHttpClient<T>(): UseHttpClientResponse<T> {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     var { user, setUser } = useContext(UserContext);
+    var dispacher = useAppDispatch();
+
+
+
+
     const send = async (
         request: RequestObject
     ) => {
@@ -58,7 +65,7 @@ export default function useHttpClient<T>(): UseHttpClientResponse<T> {
             } else if (axios.isAxiosError(error)) {
                 if (error.response?.status === 401) {
                     errorMessage = 'UnAuthorized';
-                    UserAssistant().LogOut();
+                    dispacher(updateUserToken(""))
                     setUser(null)
                     // window.location.href = '/signin'; // Redirect to login page
                 } else {

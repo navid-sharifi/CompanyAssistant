@@ -9,6 +9,7 @@ namespace App.Application.ViewModels.Company.Mappers
         {
             CreateMap<Domain.Entities.Company, AddCompanyVM>().ReverseMap();
             CreateMap<Domain.Entities.Company, GetCompanyVM>().ReverseMap();
+            CreateMap<Domain.Entities.Company, UpdateCompanyVM>().ReverseMap();
         }
     }
 }
