@@ -1,0 +1,40 @@
+.crud {
+    padding: 20px;
+    user-select: none;
+
+    .headers {
+
+        background-color: #B0F1FF;
+        padding: 5px 5px;
+        border-radius: 4px;
+
+        .header {}
+    }
+
+    .row:nth-child(odd) {
+        background-color: #F7F7F7;
+    }
+
+    .row:nth-child(even) {
+
+        background-color: #fff;
+    }
+
+    .row {
+        padding: 19px !important;
+    }
+
+    .row:hover {
+      
+        background-color: #e6fbff8e;
+
+        span {
+            color: black !important;
+        }
+    }
+
+    .header {
+        padding: 5px;
+        ;
+    }
+}

@@ -1,0 +1,8 @@
+
+npm i  
+
+rm -r ./node_modules/@grapecity
+
+rm -r ./node_modules/@syncfusion
+
+cp -r ./../dependencies/* ./node_modules

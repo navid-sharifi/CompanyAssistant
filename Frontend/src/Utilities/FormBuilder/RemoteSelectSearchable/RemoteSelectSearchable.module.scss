@@ -1,0 +1,15 @@
+.section {
+
+    background-color: red;
+
+    div:nth-child(2) {
+
+        background-color: blue;
+        padding: 10px;
+        width: 100%;
+
+        section:nth-child(1) {
+            width: 100%;
+        }
+    }
+}

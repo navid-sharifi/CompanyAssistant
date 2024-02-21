@@ -1,0 +1,137 @@
+
+@import './Styles/material.css';
+
+
+/* IrnaSan Font  */
+@import url('./Fonts/IranSans/IranSansFont.css');
+
+.excellContainer {
+  width: 1400px !important;
+  height: 800px !important;
+}
+
+
+body {
+  margin: 0;
+  font-family: IRANSansX !important;
+  /*   
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea,
+td,
+button,
+span,
+div,
+li,
+label,
+ol,
+tr {
+  font-family: IRANSansX !important;
+}
+
+div .e-icons,.e-icons{
+  font-family: e-icons !important;
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.badge {
+  font-weight: 400;
+  background-color: red;
+  color: white;
+  padding: 0% 5px;
+  margin: -10px 0 0 0;
+  text-align: center;
+  border-radius: 100%;
+  opacity: .9;
+  zoom: .9;
+  position: absolute;
+  min-width: 15px;
+}
+
+.noUpperCase {
+  text-decoration: none !important;
+  text-transform: none !important;
+}
+
+.e-ribbon.e-rbn .e-ribbon-content-height {
+  height: 60px !important;
+
+}
+
+.e-ribbon.e-rbn .e-ribbon-group {
+  height: unset !important;
+}
+
+/* 
+@font-face {
+  font-family: 'sbicons';
+    src: url(data:font/truetype;charset=utf-8;base64,AAEAAAANAIAAAwBQRkZUTYX+RGcAAAYcAAAAHEdERUYAJwANAAAF/AAAAB5PUy8yVpBcGwAAAVgAAABWY21hcOlg2h8AAAHIAAABYmdhc3D//wADAAAF9AAAAAhnbHlmp9UzsAAAAzwAAADkaGVhZBN5YdsAAADcAAAANmhoZWEIHgPGAAABFAAAACRobXR4DIABKwAAAbAAAAAYbG9jYQAsAIgAAAMsAAAAEG1heHAATQAuAAABOAAAACBuYW1lVG4gEgAABCAAAAGGcG9zdJaXZqkAAAWoAAAASwABAAAAAQAArag3N18PPPUACwQAAAAAANgtDq8AAAAA2C0OrwAA/8AEAAPAAAAACAACAAAAAAAAAAEAAAPA/8AAXAQAAAAAAAQAAAEAAAAAAAAAAAAAAAAAAAAFAAEAAAAHACsABAAAAAAAAgAAAAEAAQAAAEAAAAAAAAAAAQOAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAIABQMAAAAAAAAAAAABEAAAAAAAAAAAAAAAUGZFZABAACDqCAPA/8AAXAPAAEAAAAABAAAAAAAABAAAAAAAAAABVQAAAgAAAAQAASsBKwAAAAAAAwAAAAMAAAAcAAEAAAAAAFwAAwABAAAAHAAEAEAAAAAMAAgAAgAEAAAAIOkb6R/qCP//AAAAAAAg6RvpH+oI//8AAP/jFukW5hX+AAEAAAAAAAAAAAAAAAAAAAEGAAABAAAAAAAAAAECAAAAAgAAAAAAAAAAAAAAAAAAAAEAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYALAByAAEBKwBrAtUDFQAFAAAlCQE3CQEBKwEH/vlRAVn+p7sBBQEFUP6r/qsAAAAAAQErAGsC1QMVAAUAACUJAScJAQLV/vkBB1H+pwFZuwEFAQVQ/qv+qwAAAAAEAAD/wAQAA8AAFgAiACYAKgAAACIOAQcOAxUUHgIyPgI0JicuASQgHgEQDgEgLgEQNgEzFSMRMxEjAjdual4nHi0fED92mKaYdj8/Oyde/tQBFuyJiez+6uyJiQE3gICAgANgHDcnHURLUCpTmHY/P3aYppg7Jzd8iez+6uyJiewBFuz9yYACgP6AAAAADACWAAEAAAAAAAEABwAQAAEAAAAAAAIABwAoAAEAAAAAAAMAIwB4AAEAAAAAAAQABwCsAAEAAAAAAAUACwDMAAEAAAAAAAYABwDoAAMAAQQJAAEADgAAAAMAAQQJAAIADgAYAAMAAQQJAAMARgAwAAMAAQQJAAQADgCcAAMAAQQJAAUAFgC0AAMAAQQJAAYADgDYAHMAYgBpAGMAbwBuAHMAAHNiaWNvbnMAAFIAZQBnAHUAbABhAHIAAFJlZ3VsYXIAAEYAbwBuAHQARgBvAHIAZwBlACAAMgAuADAAIAA6ACAAcwBiAGkAYwBvAG4AcwAgADoAIAA1AC0AMQAyAC0AMgAwADEAOAAARm9udEZvcmdlIDIuMCA6IHNiaWNvbnMgOiA1LTEyLTIwMTgAAHMAYgBpAGMAbwBuAHMAAHNiaWNvbnMAAFYAZQByAHMAaQBvAG4AIAAxAC4AMAAAVmVyc2lvbiAxLjAAAHMAYgBpAGMAbwBuAHMAAHNiaWNvbnMAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAQACAAMBAgEDAQQETmV4dAhQcmV2aW91cwxub3RpZmljYXRpb24AAAAAAf//AAIAAQAAAAwAAAAWAAAAAgABAAEABgABAAQAAAACAAAAAAAAAAEAAAAA1aQnCAAAAADYLQ6vAAAAANgtDq8=) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+.textCenter{
+  text-align: center;
+}
+
+
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #235396af #DFE9EB;
+  scrollbar-color: #235396af #DFE9EB;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  border-radius: 20px;
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  scrollbar-width: thin;
+  border-radius: 20px;
+  background-color: #DFE9EB;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-thumb {
+  scrollbar-width: thin;
+  border-radius: 20px;
+  background-color: #235396af;
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #235396af;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #235396af;
+}
+
