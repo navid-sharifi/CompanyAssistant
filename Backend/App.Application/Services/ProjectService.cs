@@ -7,6 +7,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace App.Application.Services
 {
+
     public class ProjectService : BaseService<Project>
     {
         private readonly IMapper _mapper;
@@ -47,7 +48,7 @@ namespace App.Application.Services
             return await _projectRepository.GetAllAsync<GetProjectVM>(c => c.CompanyId == companyId);
         }
 
-        public async Task<GetProjectVM> Get(string projectId)
+        public async Task<GetProjectVM> GetCurrentUserProject(string projectId)
         {
             var user = await _userService.CurrentUser();
             if (user is null)
@@ -58,7 +59,7 @@ namespace App.Application.Services
 
         public async Task Delete(string projectId)
         {
-            var project = await Get(projectId);
+            var project = await GetCurrentUserProject(projectId);
             if (project is null)
                 throw new ValidationException("Project not found");
 

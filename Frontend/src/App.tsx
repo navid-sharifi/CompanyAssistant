@@ -4,6 +4,7 @@ import { UserLoginPage } from './Pages/User/Login/UserLogin';
 import { useAppSelector } from './Store/hooks';
 import { CompanyListPage } from './Pages/Company/List/CompanyListPage';
 import { ProjectListPage } from './Pages/Project/List/ProjectList';
+import { BoardPage } from './Pages/Board/Board';
 
 function App() {
 
@@ -21,9 +22,11 @@ const Pages = () => {
         <Route path="*" element={<div>404</div>} />
         <Route path='/' element={<CompanyListPage />} />
         <Route path='/Company/:companyId/Projects' element={<ProjectListPage />} />
+        <Route path='/Project/:projectId/Board' element={<BoardPage />} />
       </Routes>
     </BrowserRouter>
   )
 }
+
 
 export default App;

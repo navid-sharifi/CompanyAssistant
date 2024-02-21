@@ -3,13 +3,15 @@ import NotificationReducer from './Notification';
 import CashReducer from './Cash';
 import UserTokenReducer from './UserToken';
 import UserCompanyReducer from './UserCompany';
+import UserProjectReducer from './UserProject';
 
 export const Store = configureStore({
     reducer: {
         Notification: NotificationReducer,
         Cash: CashReducer,
         UserToken: UserTokenReducer,
-        UserCompany: UserCompanyReducer
+        UserCompany: UserCompanyReducer,
+        UserProject: UserProjectReducer
     },
 })
 

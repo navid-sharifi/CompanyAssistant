@@ -18,8 +18,8 @@ export const UseRouteAssistant = () => {
                 return { companyId }
             },
         },
-
         GoToCompanies: () => GoTo.Go('/'),
+        GoToBoard: (projectId : string) => GoTo.Go(`/Project/${projectId}/Board`),
 
 
         // engineering: {

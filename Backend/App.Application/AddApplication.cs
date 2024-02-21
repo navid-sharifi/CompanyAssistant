@@ -13,6 +13,7 @@ namespace App.Application
             services.AddScoped<UserService, UserService>();
             services.AddScoped<CompanyService, CompanyService>();
             services.AddScoped<ProjectService, ProjectService>();
+            services.AddScoped<BoardService, BoardService>();
             return services;
         }
     }

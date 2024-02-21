@@ -16,9 +16,10 @@ import { UseRouteAssistant } from "../../../Utilities/RoutingAssistant/UseRouteA
 
 export const CompanyListPage = () => {
 
-    var { isLoading, send } = useHttpClient<HttpResponseModel<CompanyModel[]>>();
     var { GoTo } = UseRouteAssistant();
 
+    var { isLoading, send } = useHttpClient<HttpResponseModel<CompanyModel[]>>();
+    
     var UserCompanies = useAppSelector(state => state.UserCompany.value);
     var dispacher = useAppDispatch();
     const UpdateCompanies = async () => {
@@ -183,4 +184,5 @@ export const CompanyListPage = () => {
 
         }
     </Box>
+
 }
