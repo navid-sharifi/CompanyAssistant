@@ -10,6 +10,7 @@ namespace App.Application.IRepositories
         Task CreateAsync(T entity);
         Task DeleteAsync(string id);
         Task<IList<T>> GetAllAsync();
+        Task<T?> Max(Expression<Func<T, object>> filter);
         Task<IList<TDto>> GetAllAsync<TDto>();
         Task<IList<TDto>> GetAllAsync<TDto>(Expression<Func<T, bool>> filter);
         Task<IReadOnlyCollection<T>> GetAllAsync(Expression<Func<T, bool>> filter);

@@ -21,67 +21,6 @@ namespace App.Persistence.Database.MongoDb.Repository
             dbCollection = db.GetCollection<T>(typeof(T).Name);
             this.mapper = mapper;
         }
-
-
-        //public async Task<IReadOnlyCollection<T>> GetAllAsync()
-        //{
-        //    return await dbCollection.Find(filterBuilder.Empty).ToListAsync();
-        //}
-
-        //public IFindFluent<T, T> QueryAble(Expression<Func<T, bool>> filter)
-        //{
-        //    return dbCollection.Find(filter);
-        //}
-
-        //public IFindFluent<T, T> QueryAble()
-        //{
-        //    return dbCollection.Find(filterBuilder.Empty);
-        //}
-
-
-        //public async Task<IReadOnlyCollection<T>> GetAllAsync(Expression<Func<T, bool>> filter)
-        //{
-        //    return await dbCollection.Find(filter).ToListAsync();
-        //}
-
-        //public async Task<T?> GetAsync(Guid id, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    FilterDefinition<T> filter = filterBuilder.Eq(x => x.Id, id);
-        //    return await dbCollection.Find(filter).FirstOrDefaultAsync(cancellationToken);
-        //}
-
-        //public async Task<T> GetAsync(Expression<Func<T, bool>> filter)
-        //{
-        //    return await dbCollection.Find(filter).FirstOrDefaultAsync();
-        //}
-
-        //public async Task CreateAsync(T entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        throw new ArgumentNullException();
-        //    }
-
-        //    await dbCollection.InsertOneAsync(entity);
-        //}
-
-        //public async Task UpdateAsync(T entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        throw new ArgumentNullException();
-        //    }
-
-        //    FilterDefinition<T> filter = filterBuilder.Eq(x => x.Id, entity.Id);
-        //    await dbCollection.ReplaceOneAsync(filter, entity);
-        //}
-
-        //public async Task DeleteAsync(Guid id)
-        //{
-        //    FilterDefinition<T> filter = filterBuilder.Eq(x => x.Id, id);
-        //    await dbCollection.DeleteOneAsync(filter);
-        //}
-
         private bool IsValid(T entity)
         {
             var type = typeof(BaseEntity).Assembly.GetExportedTypes()
@@ -134,6 +73,11 @@ namespace App.Persistence.Database.MongoDb.Repository
             return await dbCollection.Find(filter).ToListAsync();
         }
 
+        public async Task<T?> Max(Expression<Func<T, object>> filter)
+        {
+            return await dbCollection.Find(filterBuilder.Empty).SortByDescending(filter).Limit(1).FirstOrDefaultAsync();
+        }
+
         public Task<T?> GetAsync(string id, CancellationToken cancellationToken = default(CancellationToken))
         {
             return GetAsync(c => c._id == id, cancellationToken);
@@ -146,7 +90,7 @@ namespace App.Persistence.Database.MongoDb.Repository
 
         public async Task<T?> GetAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await dbCollection.Find(filter).FirstOrDefaultAsync(cancellationToken);
+            return await dbCollection.Find(filter).Limit(1).FirstOrDefaultAsync(cancellationToken);
         }
 
         public async Task<TDto> GetAsync<TDto>(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default)
@@ -162,9 +106,6 @@ namespace App.Persistence.Database.MongoDb.Repository
             FilterDefinition<T> filter = filterBuilder.Eq(x => x._id, entity._id);
             await dbCollection.ReplaceOneAsync(filter, entity, cancellationToken: cancellationToken);
         }
-
-
     }
-
 }
 

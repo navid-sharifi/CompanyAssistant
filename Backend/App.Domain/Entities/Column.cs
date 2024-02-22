@@ -5,5 +5,6 @@
         public string Name { get; set; }
         public int Order { get; set; }
         public string BoardId { get; set; }
+        public string CreatorUserId { get; set; }
     }
 }
