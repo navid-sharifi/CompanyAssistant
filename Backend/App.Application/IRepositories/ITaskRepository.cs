@@ -2,7 +2,5 @@
 {
     public interface ITaskRepository : IRepository<App.Domain.Entities.Task>
     {
-
     }
-
 }
