@@ -11,10 +11,10 @@ namespace App.Domain.Validation
                 Add(nameof(model.Name), $"{nameof(model.Name)} can't be empty");
 
             if (!model.CreatorUserId.IsGuid())
-                Add(nameof(model.Name), $"Enter valid {nameof(model.Name)}");
+                Add(nameof(model.CreatorUserId), $"Enter valid {nameof(model.CreatorUserId)}");
 
             if (!model.BoardId.IsGuid())
-                Add(nameof(model.Name), $"Enter valid {nameof(model.Name)}");
+                Add(nameof(model.BoardId), $"Enter valid {nameof(model.BoardId)}");
 
         }
     }
