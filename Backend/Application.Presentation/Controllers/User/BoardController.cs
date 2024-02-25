@@ -3,6 +3,7 @@ using App.Application.ViewModels.Board.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace Application.Presentation.Controllers.User
 {
     [Authorize(Roles = "user")]
@@ -27,7 +28,6 @@ namespace Application.Presentation.Controllers.User
             return _boardService.Update(updateBoard);
         }
 
-
         [HttpGet]
         [Route("{projectId}")]
         public Task<IList<GetBoardVM>> GetAll(Guid projectId)
@@ -43,5 +43,4 @@ namespace Application.Presentation.Controllers.User
         }
 
     }
-
 }
