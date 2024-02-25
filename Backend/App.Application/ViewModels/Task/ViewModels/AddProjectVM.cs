@@ -16,6 +16,8 @@ namespace App.Application.ViewModels.Task.ViewModels
     {
         [Required]
         public string Title { get; set; }
+        [Required]
+        public Guid Id { get; set; }
     }
 
     public class GetTaskVM

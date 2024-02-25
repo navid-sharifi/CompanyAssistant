@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using App.Application.ViewModels.Task.ViewModels;
+using AutoMapper;
 
 namespace App.Application.ViewModels.Task.Mappers
 {

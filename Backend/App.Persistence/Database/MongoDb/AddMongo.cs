@@ -14,7 +14,6 @@ namespace App.Persistence.Database.MongoDb
         {
             services.AddTransient<IMongoDatabase>(options =>
             {
-
                 var mongoSettings = configuration.GetSection("MongoDBSettings").Get<MongoDBSettings>();
                 var serviceSettings = configuration.GetSection("ServiceSettings").Get<ServiceSettings>();
 
@@ -31,6 +30,7 @@ namespace App.Persistence.Database.MongoDb
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IBoardRepository, BoardRepository>();
             services.AddScoped<IColumnRepository, ColumnRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
             return services;
         }
     }

@@ -12,16 +12,13 @@ namespace App.Application.Services
         private readonly IMapper _mapper;
         private readonly UserService _userService;
         private readonly BoardService _boardService;
-        private readonly IProjectRepository _projectRepository;
+
         private readonly IColumnRepository _columnRepository;
-        private readonly ProjectService _projectService;
-        public ColumnService(IMapper mapper, UserService userService, IProjectRepository projectRepository, ProjectService projectService, IColumnRepository columnRepository, BoardService boardService)
+
+        public ColumnService(IMapper mapper, UserService userService, IColumnRepository columnRepository, BoardService boardService)
         {
             _mapper = mapper;
             _userService = userService;
-            _projectRepository = projectRepository;
-            _projectService = projectService;
-
             _columnRepository = columnRepository;
             _boardService = boardService;
         }
@@ -29,19 +26,19 @@ namespace App.Application.Services
 
         private Task<bool> UserCanAdd(string boardId)
         {
-            return _boardService.UserCanAdd(boardId);
+            return _boardService.CheckUserCanAdd(boardId);
         }
         private Task<bool> UserCanRead(string boardId)
         {
-            return _boardService.UserCanRead(boardId);
+            return _boardService.CheckUserCanRead(boardId);
         }
         private Task<bool> UserCanDelete(string boardId)
         {
-            return _boardService.UserCanDelete(boardId);
+            return _boardService.CheckUserCanDelete(boardId);
         }
         private Task<bool> UserCanUpdate(string boardId)
         {
-            return _boardService.UserCanUpdate(boardId);
+            return _boardService.CheckUserCanUpdate(boardId);
         }
 
 
@@ -116,5 +113,4 @@ namespace App.Application.Services
             await _columnRepository.UpdateAsync(newColumn);
         }
     }
-
 }

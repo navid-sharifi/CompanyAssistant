@@ -86,7 +86,7 @@ namespace App.Application.Services
 
 
 
-        internal async Task<bool> UserCanAdd(string boardId)
+        internal async Task<bool> CheckUserCanAdd(string boardId)
         {
             var user = await _userService.CurrentUser();
             if (user is null)
@@ -96,11 +96,10 @@ namespace App.Application.Services
             if (board?.CreatorUserId == boardId)
                 return true;
 
-
-            return false;
+            throw new ValidationException("You don't have access to this board");
         }
 
-        internal async Task<bool> UserCanRead(string boardId)
+        internal async Task<bool> CheckUserCanRead(string boardId)
         {
             var user = await _userService.CurrentUser();
             if (user is null)
@@ -110,12 +109,10 @@ namespace App.Application.Services
             if (board?.CreatorUserId == boardId)
                 return true;
 
-
-
-            return false;
+            throw new ValidationException("You don't have access to this board");
         }
 
-        internal async Task<bool> UserCanDelete(string boardId)
+        internal async Task<bool> CheckUserCanDelete(string boardId)
         {
             var user = await _userService.CurrentUser();
             if (user is null)
@@ -125,11 +122,9 @@ namespace App.Application.Services
             if (board?.CreatorUserId == boardId)
                 return true;
 
-
-
-            return false;
+            throw new ValidationException("You don't have access to this board");
         }
-        internal async Task<bool> UserCanUpdate(string boardId)
+        internal async Task<bool> CheckUserCanUpdate(string boardId)
         {
             var user = await _userService.CurrentUser();
             if (user is null)
@@ -139,9 +134,7 @@ namespace App.Application.Services
             if (board?.CreatorUserId == boardId)
                 return true;
 
-
-
-            return false;
+            throw new ValidationException("You don't have access to this board");
         }
     }
 

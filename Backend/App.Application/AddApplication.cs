@@ -14,6 +14,8 @@ namespace App.Application
             services.AddScoped<CompanyService, CompanyService>();
             services.AddScoped<ProjectService, ProjectService>();
             services.AddScoped<BoardService, BoardService>();
+            services.AddScoped<ColumnService, ColumnService>();
+            services.AddScoped<TaskService, TaskService>();
             return services;
         }
     }
