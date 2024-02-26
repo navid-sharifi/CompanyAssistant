@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Application.ViewModels.Task.ViewModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Application.ViewModels.Column.ViewModels
 {
@@ -29,5 +30,7 @@ namespace App.Application.ViewModels.Column.ViewModels
         public string Order { get; set; }
         public string BoardId { get; set; }
         public string _id { get; set; }
+        public IList<GetTaskVM> Tasks { get; set; }
+
     }
 }

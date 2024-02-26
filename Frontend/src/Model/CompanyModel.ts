@@ -5,5 +5,3 @@ export interface CompanyModel {
     description?: string;
     _id: string;
 }
-
-

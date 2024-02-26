@@ -4,6 +4,7 @@ import useHttpClient from "../../Http/useHttpClient";
 import { CasheContext } from "../../../Contexts/CasheContext";
 import Select from 'react-select'
 import { toast } from "react-toastify";
+import { HttpResponseModel } from "../../Http/Models";
 
 
 
@@ -37,16 +38,11 @@ export const RemoteSelectSearchable: FC<RemoteSelectSearchableProps> = ({
     OnChangeWithDetil
 }) => {
 
-    const { isLoading, send } = useHttpClient();
+    const { isLoading, send } = useHttpClient<HttpResponseModel<any[]>>();
 
     const [Items, setItems] = useState<any[]>();
 
-    const [filter, setFilter] = useState<any>({
-        "filter": null,
-        "sorting": null,
-        "skipCount": 0,
-        "maxResultCount": 1000
-    });
+   
 
     const { cashe, setCashe } = React.useContext(CasheContext);
     /////fetch items
@@ -63,12 +59,11 @@ export const RemoteSelectSearchable: FC<RemoteSelectSearchableProps> = ({
         const { response, errorMessage } = await send({
             method: httpMethod,
             url: url,
-            data: filter,
-
+          
         });
         if (response) {
 
-            var rows = (response as any)?.result?.items as any[];
+            var rows = response.data;
             setItems(rows)
 
             if (noCash !== true) {

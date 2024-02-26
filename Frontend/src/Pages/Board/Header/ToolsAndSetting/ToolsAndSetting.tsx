@@ -5,7 +5,6 @@ import CRUD from "../../../../Utilities/CRUD/CRUD";
 
 export const ToolsAndSetting = () => {
 
-
     return <div>
         <Columns />
     </div>
@@ -14,9 +13,6 @@ export const ToolsAndSetting = () => {
 const Columns = () => {
 
     const [openList, setOpenList] = useState(false)
-
-    
-
     return <>
         <Button variant="text" color="inherit" className="noUpperCase" startIcon={<MdViewColumn />}> Columns </Button>
         <CRUD columns={[]} />

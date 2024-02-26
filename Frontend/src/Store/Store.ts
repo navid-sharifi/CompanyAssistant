@@ -4,6 +4,7 @@ import CashReducer from './Cash';
 import UserTokenReducer from './UserToken';
 import UserCompanyReducer from './UserCompany';
 import UserProjectReducer from './UserProject';
+import BoardReducer from './Board/Board';
 
 export const Store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ export const Store = configureStore({
         Cash: CashReducer,
         UserToken: UserTokenReducer,
         UserCompany: UserCompanyReducer,
-        UserProject: UserProjectReducer
+        UserProject: UserProjectReducer,
+        Board: BoardReducer
     },
 })
 

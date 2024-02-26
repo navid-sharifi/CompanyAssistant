@@ -23,8 +23,6 @@ export const UserCompanySlice = createSlice({
     },
 })
 
+
 export const { updateUserCompany } = UserCompanySlice.actions
-
-// Other code such as selectors can use the imported `RootState` type
-
 export default UserCompanySlice.reducer

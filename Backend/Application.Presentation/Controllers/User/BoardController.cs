@@ -35,6 +35,13 @@ namespace Application.Presentation.Controllers.User
             return _boardService.GetAll(projectId.ToString());
         }
 
+        [HttpGet]
+        [Route("WithTasks/{boardId}")]
+        public Task<GetBoardVM?> GetWithTasks(Guid boardId)
+        {
+            return _boardService.GetWithTasks(boardId.ToString());
+        }
+
         [HttpDelete]
         [Route("{id}")]
         public Task Delete(Guid id)

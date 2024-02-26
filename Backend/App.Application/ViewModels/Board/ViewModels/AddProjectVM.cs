@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Application.ViewModels.Column.ViewModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Application.ViewModels.Board.ViewModels
 {
@@ -25,5 +26,6 @@ namespace App.Application.ViewModels.Board.ViewModels
         public string Name { get; set; }
         public Guid ProjectId { get; set; }
         public string _id { get; set; }
+        public IList<GetColumnVM> Columns { get; set; }
     }
 }

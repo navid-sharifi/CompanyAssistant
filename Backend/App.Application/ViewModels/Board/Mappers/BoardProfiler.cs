@@ -7,9 +7,9 @@ namespace App.Application.ViewModels.Board.Mappers
     {
         public BoardProfiler()
         {
-            CreateMap<Domain.Entities.Project, AddBoardVM>().ReverseMap();
-            CreateMap<Domain.Entities.Project, GetBoardVM>().ReverseMap();
-            CreateMap<Domain.Entities.Project, UpdateBoardVM>().ReverseMap();
+            CreateMap<Domain.Entities.Board, AddBoardVM>().ReverseMap();
+            CreateMap<Domain.Entities.Board, GetBoardVM>().ReverseMap();
+            CreateMap<Domain.Entities.Board, UpdateBoardVM>().ReverseMap();
         }
     }
 }

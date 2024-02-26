@@ -14,7 +14,7 @@ import { RiAddLine } from "react-icons/ri";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { Card, CardContent, Grid, Typography } from "@mui/joy";
 import RemoveHtmlTags, { SummarizeText } from "../../../Utilities/String/RemoveHtmlTags";
-
+import { FaArrowLeft } from "react-icons/fa";
 
 
 export const ProjectListPage = () => {
@@ -65,10 +65,24 @@ export const ProjectListPage = () => {
         return <></>
     }
 
+
     return <Box>
-        <div style={{ textAlign: "right", padding: "10px" }}>
+        <div style={{ textAlign: "right", padding: "10px", display: "grid", gridTemplate: "auto / 90px 1fr 150px " }}>
+
             <FormBuilder
-                SubmitButtonName="Add new Project"
+                SubmitButtonName="Back"
+                SubmitButtonNoUpperCase
+                JustButton
+                SubmitButtonVariant="text"            
+                SubmitButtonStartIcon={<FaArrowLeft />}
+                OnSubmitForm={() => {
+                    GoTo.GoToCompanies();
+                }}
+            />
+            <div></div>
+            <FormBuilder
+                SubmitButtonName="Add Project"
+                SubmitButtonVariant="text"    
                 SubmitButtonNoUpperCase
                 JustButton
                 SubmitButtonStartIcon={<RiAddLine />}
