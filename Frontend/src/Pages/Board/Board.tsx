@@ -8,16 +8,48 @@ import { useEffect, useState } from 'react';
 import { UseBoardAcion } from './Logic/BoardLogic';
 import useHttpClient from '../../Utilities/Http/useHttpClient';
 import { Http } from '../../Model/Enums/Http';
+import { CSSProperties } from 'styled-components';
+import FormBuilder from '../../Utilities/FormBuilder/FormBuilder';
 
 
 
-export interface BoardTask {
-    id: string
-    title: string
-    description?: string
-    label?: string
-    draggable: boolean
+
+
+
+enum CardType {
+    task,
+    AddColumn
 }
+
+
+interface BoardData {
+    lanes: Lane[];
+}
+interface Lane {
+    id: string;
+    title?: string;
+    label?: string;
+    style?: CSSProperties;
+    cards: Card[];
+    currentPage?: number;
+    droppable?: boolean;
+    labelStyle?: CSSProperties;
+    cardStyle?: CSSProperties;
+    disallowAddingCard?: boolean;
+    [key: string]: any;
+}
+interface Card {
+    id: string;
+    title?: string;
+    label?: string;
+    description?: string;
+    laneId?: string;
+    style?: CSSProperties;
+    draggable?: boolean;
+    [key: string]: any;
+    CardType: CardType
+}
+
 
 
 
@@ -33,8 +65,78 @@ export const BoardPage = () => {
 
     var { send } = useHttpClient();
     var { SetSelectedBoard, SelectedBoard } = UseBoardAcion(projectId ?? '');
-    const [data, setData] = useState<{ lanes: any[] }>();
+    const [data, setData] = useState<BoardData>({
+        lanes: [
 
+            {
+                id: 'lane1',
+                title: 'Planned Tasks',
+                label: '2/2',
+
+                cards: [
+                    {
+                        id: 'Card1',
+                        title: 'up',
+                        description: 'Can AI make memes',
+                        label: '30 mins',
+                        navid: "dfd",
+                        draggable: false,
+                        CardType: CardType.task
+                    },
+                    {
+                        id: 'Card1',
+                        title: 'up',
+                        description: 'Can AI make memes',
+                        label: '30 mins',
+                        navid: "dfd",
+                        draggable: false,
+                        CardType: CardType.task
+                    },
+                    {
+                        id: 'Card1',
+                        title: 'up',
+                        description: 'Can AI make memes',
+                        label: '30 mins',
+                        navid: "dfd",
+                        draggable: false,
+                        CardType: CardType.task
+                    },
+                ]
+            },
+
+            {
+                id: 'Add',
+                title: ' ',
+                label: ' ',
+                style: { backgroundColor: '#ffffff3d' },
+                cardStyle: {},
+                cards: [{
+                    CardType: CardType.AddColumn,
+                    id: "none"
+                }]
+            },
+
+        ]
+    });
+
+    useEffect(() => {
+        // setData(f => {
+        //     return {
+        //         lanes: [...f?.lanes,
+        //         {
+        //             id: 'lane1',
+        //             title: 'Planned Tasks',
+        //             label: '2/2',
+
+        //         }
+
+        //         ]
+        //     }
+        // }
+        // )
+
+
+    }, [data]);
 
 
     const GetBoardData = async () => {
@@ -96,9 +198,14 @@ export const BoardPage = () => {
 
     const components = {
         Card: (data: any) => {
-            console.log(data.title);
+            var card = data as Card
+
+            if (card.CardType === CardType.AddColumn) {
+               return <FormBuilder/>
+            }
+
             return <Paper>{data.title}{data.index}</Paper>
-        },
+        }
     };
 
     return <>
