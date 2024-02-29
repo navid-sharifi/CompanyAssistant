@@ -7,9 +7,9 @@ namespace App.Application.ViewModels.Column.Mappers
     {
         public ColumnProfiler()
         {
-            CreateMap<Domain.Entities.Project, AddColumnVM>().ReverseMap();
-            CreateMap<Domain.Entities.Project, GetColumnVM>().ReverseMap();
-            CreateMap<Domain.Entities.Project, UpdateColumnVM>().ReverseMap();
+            CreateMap<Domain.Entities.Column, AddColumnVM>().ReverseMap();
+            CreateMap<Domain.Entities.Column, GetColumnVM>().ReverseMap();
+            CreateMap<Domain.Entities.Column, UpdateColumnVM>().ReverseMap();
         }
     }
 }

@@ -19,16 +19,19 @@ export const UseRouteAssistant = () => {
             },
         },
         GoToCompanies: () => GoTo.Go('/'),
-        GoToBoard: (projectId : string) => GoTo.Go(`/Project/${projectId}/Board`),
+        GoToBoard: (projectId: string) => GoTo.Go(`/Project/${projectId}/Board`),
         Board: {
+            GoToAddColumn: (projectId: string, boardId: string) => GoTo.Go(GoTo.Board.AddColumnUrl(projectId, boardId)),
+            AddColumnUrl: (projectId: string, boardId: string) => `/Project/${projectId}/Board/${boardId}/AddColumn`,
             BoardParam: () => {
                 var { projectId } = param;
                 return { projectId }
             },
         },
 
-        // engineering: {
+        
 
+        // engineering: {
         //     GoToAddDocument: () => navigate('/engineering/AddDocument'),
 
         //     SendByWorkFollowUrl: (documentId: string) => `${GoTo.engineering.DocumentDtailUrl(documentId)}/SendByWorkFollow`,

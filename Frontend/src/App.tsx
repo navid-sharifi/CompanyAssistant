@@ -23,6 +23,7 @@ const Pages = () => {
         <Route path='/' element={<CompanyListPage />} />
         <Route path='/Company/:companyId/Projects' element={<ProjectListPage />} />
         <Route path='/Project/:projectId/Board' element={<BoardPage />} />
+        <Route path='/Project/:projectId/Board/:boardId/AddColumn' element={<BoardPage />} />
       </Routes>
     </BrowserRouter>
   )

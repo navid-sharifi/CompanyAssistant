@@ -2,13 +2,12 @@ import { FC, useEffect, useState } from "react"
 import { UseRouteAssistant } from "../../../../Utilities/RoutingAssistant/UseRouteAssistant"
 import useHttpClient from "../../../../Utilities/Http/useHttpClient"
 import { Http } from "../../../../Model/Enums/Http"
-import { HttpResponseModel } from "../../../../Utilities/Http/Models"
 import { Modal } from "../../../../Utilities/Components/Modal/Modal"
 import FormBuilder, { FieldType } from "../../../../Utilities/FormBuilder/FormBuilder"
 import AddIcon from '@mui/icons-material/Add';
-import { useAppDispatch, useAppSelector } from "../../../../Store/hooks"
-import { updateSelectedBoard } from "../../../../Store/Board/Board"
 import { UseBoardAcion } from "../../Logic/BoardLogic"
+import { AddColumn } from "../../AddColumn/AddColumn"
+import { HttpResponseModel } from '../../../../Utilities/Http/Models'
 
 
 export const BoardsHeader = () => {
@@ -25,11 +24,14 @@ export const BoardsHeader = () => {
             method: Http.GET,
         })
 
+
         if (response) {
             if (response.data.length === 0) {
                 SetOpenAddFirstBoardModal(true)
             }
         }
+
+
 
     }
 
@@ -38,6 +40,7 @@ export const BoardsHeader = () => {
     }, [])
 
     return <div>
+        <AddColumn />
         <FormBuilder
             Fields={[{
                 displayname: "Boards",
@@ -97,3 +100,5 @@ const AddBoard: FC<{
             />
         </Modal>
     }
+
+
