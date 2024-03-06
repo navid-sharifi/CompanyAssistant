@@ -13,6 +13,9 @@ import FormBuilder from '../../Utilities/FormBuilder/FormBuilder';
 import AddIcon from '@mui/icons-material/Add';
 import { HttpResponseModel } from '../../Utilities/Http/Models';
 import { toast } from 'react-toastify';
+import { AddTask } from './AddTask/AddTask';
+import { AddColumn } from './AddColumn/AddColumn';
+import { ShowTask } from './ShowTask/ShowTask';
 
 
 
@@ -60,79 +63,25 @@ interface Card {
 
 export const BoardPage = () => {
 
-
     var { GoTo } = UseRouteAssistant()
     var { projectId } = GoTo.Board.BoardParam();
     if (!stringIsGuid(projectId ?? '')) {
         GoTo.GoToCompanies();
     }
+
     var { send } = useHttpClient<HttpResponseModel<Board>>();
     var { SetSelectedBoard, SelectedBoard } = UseBoardAcion(projectId ?? '');
-    const [boardData, setBoardData] = useState<Board>()
-
-    const [data, setData] = useState<BoardData | undefined>({
-        lanes: [
-            {
-                id: 'lane1',
-                title: 'Planned Tasks',
-                label: '2/2',
-
-                cards: [
-                    {
-                        id: 'Card1',
-                        title: 'up',
-                        description: 'Can AI make memes',
-                        label: '30 mins',
-                        navid: "dfd",
-                        draggable: false,
-                        CardType: CardType.task
-                    },
-                    {
-                        id: 'Card1',
-                        title: 'up',
-                        description: 'Can AI make memes',
-                        label: '30 mins',
-                        navid: "dfd",
-                        draggable: false,
-                        CardType: CardType.task
-                    },
-                    {
-                        id: 'Card1',
-                        title: 'up',
-                        description: 'Can AI make memes',
-                        label: '30 mins',
-                        navid: "dfd",
-                        draggable: false,
-                        CardType: CardType.task
-                    },
-                ]
-            },
-
-            {
-                id: 'Add',
-                title: ' ',
-                label: ' ',
-                style: { backgroundColor: '#ffffff3d' },
-                cardStyle: {},
-                cards: [{
-                    CardType: CardType.AddColumn,
-                    draggable: false,
-                    id: "none"
-                }]
-            },
-
-        ]
-    });
+    const [FetchedData, setFetchedData] = useState<Board>()
+    const [data, setData] = useState<BoardData | undefined>();
 
     useEffect(() => {
-
-        if (!boardData) {
+        if (!FetchedData) {
             setData(undefined)
             return;
         }
         setData({
-            lanes: boardData.columns.length > 0 ?
-                boardData.columns.sort((n1, n2) => {
+            lanes: [...(FetchedData.columns.length > 0 ?
+                FetchedData.columns.sort((n1, n2) => {
                     if (n1.order > n2.order) {
                         return 1;
                     }
@@ -144,28 +93,55 @@ export const BoardPage = () => {
                     return {
                         id: column._id,
                         title: column.name,
-                        cards: [{
+                        cards: [...(column.tasks && column.tasks.length > 0 ? column.tasks.map((task) => {
+                            return {
+                                CardType: CardType.task,
+                                id: task._id,
+                                draggable: false,
+                                title: task.title,
+                                ColumnId: task.columnId,
+                                style: { backgroundColor: "#ffffff3d" }
+                            }
+                        }) : []),
+                        {
                             CardType: CardType.AddTask,
                             id: "addTask",
                             draggable: false,
                             ColumnId: column._id,
                             style: { backgroundColor: "#ffffff3d" }
-                        }]
+                        }
+                        ]
+
                     }
                 })
-                : []
+                : [])
+                ,
+            {
+                id: "assCol",
+                style: { backgroundColor: "transparent" },
+                cards: [
+                    {
+                        CardType: CardType.AddColumn,
+                        id: "addTask",
+                        draggable: false,
+                        ColumnId: "addd",
+                        style: { backgroundColor: "#ffffff3d" }
+                    }
+                ],
+            }
+            ],
+
         })
 
-    }, [boardData]);
+    }, [FetchedData]);
 
-
-    const GetBoardData = async () => {
+    const FetchBoardData = async () => {
 
         var { response, errorMessage } = await send({
             url: "/Board/WithTasks/" + SelectedBoard,
             method: Http.GET
         })
-        setBoardData(response?.data)
+        setFetchedData(response?.data)
         if (errorMessage) {
             toast.error(errorMessage, {
                 position: "bottom-center",
@@ -185,7 +161,7 @@ export const BoardPage = () => {
         if (!SelectedBoard) {
             return
         }
-        GetBoardData()
+        FetchBoardData()
     }, [SelectedBoard])
 
 
@@ -194,26 +170,36 @@ export const BoardPage = () => {
             var card = data as Card
             if (card.CardType === CardType.AddColumn) {
                 return <Box padding={"1px"} textAlign={"center"}>
-                    <Button onClick={() => GoTo.Board.GoToAddColumn(projectId as string, SelectedBoard as string)} style={{ backgroundColor: "transparent" }} startIcon={<AddIcon />} variant='contained' className='noUpperCase' color='primary'> Add Column </Button>
+                    <Button
+                        onClick={() => GoTo.Board.GoToAddColumn(projectId as string, SelectedBoard as string)}
+                        style={{ backgroundColor: "transparent" }}
+                        startIcon={<AddIcon />}
+                        variant='contained'
+                        className='noUpperCase'
+                        color='primary'> Add Column </Button>
                 </Box>
             }
 
             if (card.CardType === CardType.AddTask) {
                 return <Box padding={"1px"} textAlign={"center"}>
                     <Button
-                        onClick={() => GoTo.Board.GoToAddColumn(projectId as string, SelectedBoard as string)}
-                        startIcon={<AddIcon />} 
+                        onClick={() => GoTo.Board.GoToAddTask(projectId as string, SelectedBoard as string, card.ColumnId as string)}
+                        startIcon={<AddIcon />}
                         variant='outlined' className='noUpperCase' color='primary'> Task </Button>
                 </Box>
             }
-
-
-            return <Paper>{data.title}{data.index}</Paper>
+            return <Box marginTop={"5px"} onClick={()=>{ GoTo.Board.GoToShowTask() }}>
+                <Paper style={{ borderRadius: "0", padding: "5px" }}>
+                    {data.title} {data.index}
+                </Paper>
+            </Box>
         }
     };
 
-
-    return <>
+    return <> gh
+        <AddTask />
+        <ShowTask />
+        <AddColumn />
         <BoardsHeader />
         <Paper>
             {/* <ToolsAndSetting /> */}
@@ -240,8 +226,11 @@ interface Column {
     order: string
     boardId: string
     _id: string
-    tasks: any[]
+    tasks: Task[]
 }
 
-
-
+interface Task {
+    columnId: string,
+    title: string,
+    _id: string
+}

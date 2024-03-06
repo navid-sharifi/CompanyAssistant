@@ -6,7 +6,6 @@ import { Modal } from "../../../../Utilities/Components/Modal/Modal"
 import FormBuilder, { FieldType } from "../../../../Utilities/FormBuilder/FormBuilder"
 import AddIcon from '@mui/icons-material/Add';
 import { UseBoardAcion } from "../../Logic/BoardLogic"
-import { AddColumn } from "../../AddColumn/AddColumn"
 import { HttpResponseModel } from '../../../../Utilities/Http/Models'
 
 
@@ -24,23 +23,19 @@ export const BoardsHeader = () => {
             method: Http.GET,
         })
 
-
         if (response) {
             if (response.data.length === 0) {
                 SetOpenAddFirstBoardModal(true)
             }
         }
-
-
-
     }
 
+    
     useEffect(() => {
         GetBoards()
     }, [])
 
     return <div>
-        <AddColumn />
         <FormBuilder
             Fields={[{
                 displayname: "Boards",

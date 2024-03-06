@@ -24,5 +24,6 @@ namespace App.Application.ViewModels.Task.ViewModels
     {
         public string Title { get; set; }
         public string ColumnId { get; set; }
+        public string _id { get; set; }
     }
 }

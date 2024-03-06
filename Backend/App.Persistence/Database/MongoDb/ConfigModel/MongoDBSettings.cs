@@ -2,6 +2,6 @@
 {
     public class MongoDBSettings
     {
-        public required string ConnectionString { get; set; }
+        public string ConnectionString { get; set; }
     }
 }

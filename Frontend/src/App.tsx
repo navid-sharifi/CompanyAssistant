@@ -11,7 +11,6 @@ function App() {
   var UserToken = useAppSelector(state => state.UserToken.value)
   if (!UserToken)
     return <UserLoginPage />
-
   return <Pages />
 }
 
@@ -24,10 +23,10 @@ const Pages = () => {
         <Route path='/Company/:companyId/Projects' element={<ProjectListPage />} />
         <Route path='/Project/:projectId/Board' element={<BoardPage />} />
         <Route path='/Project/:projectId/Board/:boardId/AddColumn' element={<BoardPage />} />
+        <Route path='/Project/:projectId/Board/:boardId/Column/:columnId' element={<BoardPage />} />
       </Routes>
     </BrowserRouter>
   )
 }
-
 
 export default App;

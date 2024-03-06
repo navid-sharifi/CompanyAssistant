@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 
+
 namespace App.Persistence.Database.MongoDb
 {
     public static class Mongo
@@ -14,8 +15,22 @@ namespace App.Persistence.Database.MongoDb
         {
             services.AddTransient<IMongoDatabase>(options =>
             {
-                var mongoSettings = configuration.GetSection("MongoDBSettings").Get<MongoDBSettings>();
-                var serviceSettings = configuration.GetSection("ServiceSettings").Get<ServiceSettings>();
+
+
+                var mongoSettingsConfig = configuration.GetSection("MongoDBSettings");
+
+                var mongoSettings = new MongoDBSettings()
+                {
+                    ConnectionString = mongoSettingsConfig["ConnectionString"]
+                };
+
+                var serviceSettingConfig = configuration.GetSection("ServiceSettings");
+
+                var serviceSettings = new ServiceSettings()
+                {
+                    ServiceName = serviceSettingConfig["ServiceName"]
+                };
+
 
                 if (mongoSettings is null || serviceSettings is null)
                     throw new Exception(
