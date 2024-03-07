@@ -106,6 +106,16 @@ namespace App.Application.Services
             var newTask = _mapper.Map(updateTask, task);
             await _taskRepository.UpdateAsync(newTask);
         }
+
+        public async Task<GetTaskDetail> GetTaskDetail(string taskId)
+        {
+            var task = await _taskRepository.GetAsync<GetTaskDetail>(c => c._id == taskId);
+            if (task is null)
+                throw new ValidationException("The task not found.");
+            var column = await EnsureColumnExist(task.ColumnId);
+            await CheckUserCanUpdate(column.BoardId);
+            return task;
+        }
     }
 
 }

@@ -10,6 +10,7 @@ namespace App.Application.ViewModels.Task.Mappers
             CreateMap<Domain.Entities.Task, AddTaskVM>().ReverseMap();
             CreateMap<Domain.Entities.Task, GetTaskVM>().ReverseMap();
             CreateMap<Domain.Entities.Task, UpdateTaskVM>().ReverseMap();
+            CreateMap<Domain.Entities.Task, GetTaskDetail>().ReverseMap();
         }
     }
 }

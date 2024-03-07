@@ -15,6 +15,13 @@ namespace Application.Presentation.Controllers.User
             _taskService = taskService;
         }
 
+        [HttpGet("GetTaskDetail/{id}")]
+        public Task<GetTaskDetail> GetTaskDetail(Guid id)
+        {
+            return _taskService.GetTaskDetail(id.ToString());
+        }
+
+
         [HttpPost]
         public Task Create([FromBody] AddTaskVM addTask)
         {
