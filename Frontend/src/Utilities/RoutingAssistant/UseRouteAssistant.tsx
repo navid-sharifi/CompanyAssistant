@@ -18,12 +18,19 @@ export const UseRouteAssistant = () => {
                 return { companyId }
             },
         },
+
         GoToCompanies: () => GoTo.Go('/'),
         GoToBoard: (projectId: string) => GoTo.Go(`/Project/${projectId}/Board`),
         Board: {
 
-            GoToShowTask : ()=>{},
-            
+            GoToShowTask: (projectId: string, boardId: string, columnId: string, taskId: string) => GoTo.Go(GoTo.Board.ShowTaskUrl(projectId, boardId, columnId, taskId)),
+            ShowTaskUrl: (projectId: string, boardId: string, columnId: string, taskId: string) => `/Project/${projectId}/Board/${boardId}/Column/${columnId}/Task/${taskId}`,
+            ShowTaskParam: () => {
+                var { projectId, boardId, columnId, taskId } = param;
+                return { projectId, boardId, columnId, taskId }
+            },
+
+
             AddTaskUrl: (projectId: string, boardId: string, columnId: string) => `/Project/${projectId}/Board/${boardId}/Column/${columnId}`,
             GoToAddTask: (projectId: string, boardId: string, columnId: string) => GoTo.Go(GoTo.Board.AddTaskUrl(projectId, boardId, columnId)),
             TaskParam: () => {
