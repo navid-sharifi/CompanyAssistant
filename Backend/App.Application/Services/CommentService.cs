@@ -40,5 +40,11 @@ namespace App.Application.Services
             entity.LastEditTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             await commentRepository.CreateAsync(entity);
         }
+
+        public Task<IList<GetCommentVM>> GetTaskCommentWithoutCheckAccess(string taskId)
+        {
+            return commentRepository.GetAllAsync<GetCommentVM>(c => c.TaskId == taskId)
+        }
+
     }
 }

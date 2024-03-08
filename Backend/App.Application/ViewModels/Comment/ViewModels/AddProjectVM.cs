@@ -12,6 +12,13 @@ namespace App.Application.ViewModels.Comment.ViewModels
         public Guid TaskId { get; set; }
     }
 
+    public class GetCommentVM
+    {
+       
+        public string Message { get; set; }
+        public Guid TaskId { get; set; }
+
+    }
 
     // public class UpdateTaskVM
     // {
@@ -27,7 +34,7 @@ namespace App.Application.ViewModels.Comment.ViewModels
     //     public string ColumnId { get; set; }
     //     public string _id { get; set; }
     // }
-    
+
     // public class GetTaskDetail
     // {
     //     public string Title { get; set; }

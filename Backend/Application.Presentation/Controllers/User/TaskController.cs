@@ -1,4 +1,5 @@
 ﻿using App.Application.Services;
+using App.Application.ViewModels.Comment.ViewModels;
 using App.Application.ViewModels.Task.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,12 @@ namespace Application.Presentation.Controllers.User
     public class TaskController : BaseApiController
     {
         private readonly TaskService _taskService;
+        private readonly CommentService commentService;
 
-        public TaskController(TaskService taskService)
+        public TaskController(TaskService taskService, CommentService commentService)
         {
             _taskService = taskService;
+            this.commentService = commentService;
         }
 
         [HttpGet("GetTaskDetail/{id}")]
@@ -21,10 +24,10 @@ namespace Application.Presentation.Controllers.User
             return _taskService.GetTaskDetail(id.ToString());
         }
 
-        [HttpPost]
-        public Task AddComment([FromBody] AddTaskVM addTask)
+        [HttpPost("AddComment")]
+        public Task AddComment([FromBody] AddCommentVM addComment)
         {
-            return _taskService.Add(addTask);
+            return commentService.AddComment(addComment);
         }
 
         [HttpPost]

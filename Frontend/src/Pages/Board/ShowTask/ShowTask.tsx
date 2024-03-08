@@ -74,11 +74,10 @@ export const ShowTask: FC = () => {
     </Modal>
 }
 
+
 interface TaskDetail {
     title: string
     columnId: string
     _id: string
 }
-
-
 

@@ -13,16 +13,18 @@ namespace App.Application.Services
         private readonly IMapper _mapper;
         private readonly UserService _userService;
         private readonly BoardService _boardService;
+        private readonly CommentService commentService;
         private readonly IColumnRepository _columnRepository;
         private readonly ITaskRepository _taskRepository;
 
-        public TaskService(IMapper mapper, UserService userService, IColumnRepository columnRepository, BoardService boardService, ITaskRepository taskRepository)
+        public TaskService(IMapper mapper, UserService userService, IColumnRepository columnRepository, BoardService boardService, ITaskRepository taskRepository, CommentService commentService)
         {
             _mapper = mapper;
             _userService = userService;
             _columnRepository = columnRepository;
             _boardService = boardService;
             _taskRepository = taskRepository;
+            this.commentService = commentService;
         }
 
 
@@ -121,11 +123,15 @@ namespace App.Application.Services
 
         public async Task<GetTaskDetail> GetTaskDetail(string taskId)
         {
+
             var task = await _taskRepository.GetAsync<GetTaskDetail>(c => c._id == taskId);
             if (task is null)
                 throw new ValidationException("The task not found.");
             var column = await EnsureColumnExist(task.ColumnId);
-            await CheckUserCanUpdate(column.BoardId);
+            await CheckUserCanRead(column.BoardId);
+
+            commentService.GetTaskComment(task.Id);
+
             return task;
         }
     }

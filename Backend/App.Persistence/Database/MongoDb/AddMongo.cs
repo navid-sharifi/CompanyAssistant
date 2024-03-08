@@ -1,5 +1,6 @@
 ﻿using App.Application.Config.Models;
 using App.Application.IRepositories;
+using App.Domain.Entities;
 using App.Persistence.Database.MongoDb.ConfigModel;
 using App.Persistence.Repositoriess;
 using Microsoft.Extensions.Configuration;
@@ -46,7 +47,7 @@ namespace App.Persistence.Database.MongoDb
             services.AddScoped<IBoardRepository, BoardRepository>();
             services.AddScoped<IColumnRepository, ColumnRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
-            services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
             return services;
         }
     }
