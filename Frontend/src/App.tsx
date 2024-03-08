@@ -24,6 +24,7 @@ const Pages = () => {
         <Route path='/Project/:projectId/Board' element={<BoardPage />} />
         <Route path='/Project/:projectId/Board/:boardId/AddColumn' element={<BoardPage />} />
         <Route path='/Project/:projectId/Board/:boardId/Column/:columnId' element={<BoardPage />} />
+        <Route path='/Project/:projectId/Board/:boardId/Column/:columnId/Task/:taskId' element={<BoardPage />} />
       </Routes>
     </BrowserRouter>
   )

@@ -47,6 +47,7 @@ interface Lane {
 interface Card {
     id: string;
     ColumnId?: string;
+    BoardId?: string;
     title?: string;
     label?: string;
     description?: string;
@@ -70,7 +71,9 @@ export const BoardPage = () => {
     }
 
     var { send } = useHttpClient<HttpResponseModel<Board>>();
+
     var { SetSelectedBoard, SelectedBoard } = UseBoardAcion(projectId ?? '');
+
     const [FetchedData, setFetchedData] = useState<Board>()
     const [data, setData] = useState<BoardData | undefined>();
 
@@ -94,14 +97,18 @@ export const BoardPage = () => {
                         id: column._id,
                         title: column.name,
                         cards: [...(column.tasks && column.tasks.length > 0 ? column.tasks.map((task) => {
-                            return {
+
+                            var taskCard: Card = {
                                 CardType: CardType.task,
                                 id: task._id,
                                 draggable: false,
                                 title: task.title,
                                 ColumnId: task.columnId,
+                                BoardId: SelectedBoard,
                                 style: { backgroundColor: "#ffffff3d" }
                             }
+
+                            return taskCard
                         }) : []),
                         {
                             CardType: CardType.AddTask,
@@ -188,7 +195,7 @@ export const BoardPage = () => {
                         variant='outlined' className='noUpperCase' color='primary'> Task </Button>
                 </Box>
             }
-            return <Box marginTop={"5px"} onClick={()=>{ GoTo.Board.GoToShowTask() }}>
+            return <Box marginTop={"5px"} onClick={() => { GoTo.Board.GoToShowTask(projectId as string, card.BoardId as string, card.ColumnId as string, card.id as string) }}>
                 <Paper style={{ borderRadius: "0", padding: "5px" }}>
                     {data.title} {data.index}
                 </Paper>
@@ -196,7 +203,7 @@ export const BoardPage = () => {
         }
     };
 
-    return <> gh
+    return <>
         <AddTask />
         <ShowTask />
         <AddColumn />

@@ -3,12 +3,17 @@ import { Modal as MuiModal } from "@mui/material"
 import React, { FC } from "react"
 
 export const Modal: FC<{
-    children?: React.ReactNode
-}> = ({ children }) => {
+    children?: React.ReactNode,
+    width?: number,
+    onClose?: {
+        bivarianceHack(event: {}, reason: 'backdropClick' | 'escapeKeyDown'): void;
+    }['bivarianceHack'];
+}> = ({ children, onClose, width = 500 }) => {
 
-    return (<MuiModal open>
-        <ModalDialog size="lg" sx={{ width: "500px" }}>{children}</ModalDialog>
+    return (<MuiModal open onClose={onClose}>
+        <ModalDialog size="lg" sx={{ width: width + "px" }}>{children}</ModalDialog>
     </MuiModal>
     )
+
 
 }
