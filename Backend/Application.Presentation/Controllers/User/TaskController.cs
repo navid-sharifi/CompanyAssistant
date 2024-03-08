@@ -21,6 +21,11 @@ namespace Application.Presentation.Controllers.User
             return _taskService.GetTaskDetail(id.ToString());
         }
 
+        [HttpPost]
+        public Task AddComment([FromBody] AddTaskVM addTask)
+        {
+            return _taskService.Add(addTask);
+        }
 
         [HttpPost]
         public Task Create([FromBody] AddTaskVM addTask)
