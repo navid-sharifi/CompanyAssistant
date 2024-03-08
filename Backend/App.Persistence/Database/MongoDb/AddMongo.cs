@@ -46,6 +46,7 @@ namespace App.Persistence.Database.MongoDb
             services.AddScoped<IBoardRepository, BoardRepository>();
             services.AddScoped<IColumnRepository, ColumnRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
             return services;
         }
     }
