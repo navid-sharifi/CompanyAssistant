@@ -118,4 +118,19 @@ namespace App.Application.Services
         }
     }
 
+
+
+    public class CommentService : BaseService<Domain.Entities.Comment>
+    {
+        public CommentService()
+        {
+            
+        }
+
+
+        public void AddComment(){
+
+        }
+    }
+
 }
