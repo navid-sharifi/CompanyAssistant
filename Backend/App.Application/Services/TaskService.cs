@@ -2,6 +2,7 @@
 using App.Application.ViewModels.Task.ViewModels;
 using App.Domain.Entities;
 using AutoMapper;
+using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
 using Task = System.Threading.Tasks.Task;
 
@@ -22,6 +23,17 @@ namespace App.Application.Services
             _columnRepository = columnRepository;
             _boardService = boardService;
             _taskRepository = taskRepository;
+        }
+
+
+        public async Task CheckUserCanAddWithTaskId(string taskId)
+        {
+
+            var task = await _taskRepository.GetAsync<GetTaskVM>(c => c._id == taskId);
+            if (task is null)
+                throw new ValidationException("The task not found.");
+            var column = await EnsureColumnExist(task.ColumnId);
+            await CheckUserCanRead(column.BoardId);
         }
 
         private Task<bool> CheckUserCanAdd(string boardId)
@@ -115,21 +127,6 @@ namespace App.Application.Services
             var column = await EnsureColumnExist(task.ColumnId);
             await CheckUserCanUpdate(column.BoardId);
             return task;
-        }
-    }
-
-
-
-    public class CommentService : BaseService<Domain.Entities.Comment>
-    {
-        public CommentService()
-        {
-            
-        }
-
-
-        public void AddComment(){
-
         }
     }
 
