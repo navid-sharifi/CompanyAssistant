@@ -1,6 +1,7 @@
 ﻿using App.Application.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace App.Application
 {
@@ -17,6 +18,7 @@ namespace App.Application
             services.AddScoped<ColumnService, ColumnService>();
             services.AddScoped<TaskService, TaskService>();
             services.AddScoped<CommentService, CommentService>();
+            
             return services;
         }
     }

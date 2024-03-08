@@ -11,7 +11,7 @@ export const Modal: FC<{
 }> = ({ children, onClose, width = 500 }) => {
 
     return (<MuiModal open onClose={onClose}>
-        <ModalDialog size="lg" sx={{ width: width + "px" }}>{children}</ModalDialog>
+        <ModalDialog size="lg" sx={{ width: width + "px", overflow: "auto" }}>{children}</ModalDialog>
     </MuiModal>
     )
 

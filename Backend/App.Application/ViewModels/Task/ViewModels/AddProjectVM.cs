@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using App.Application.ViewModels.Comment.ViewModels;
 
 namespace App.Application.ViewModels.Task.ViewModels
 {
@@ -32,5 +33,6 @@ namespace App.Application.ViewModels.Task.ViewModels
         public string Title { get; set; }
         public string ColumnId { get; set; }
         public string _id { get; set; }
+        public IList<GetCommentVM> Comments { get; internal set; }
     }
 }

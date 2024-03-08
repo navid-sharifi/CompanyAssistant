@@ -25,18 +25,7 @@ namespace Application.Presentation
                     .AllowAnyHeader());
             });
 
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: MyAllowSpecificOrigins,
-            //                      builder =>
-            //                      {
-            //                          builder.WithOrigins("http://example.com",
-            //                                              "http://www.contoso.com");
-            //                      });
-            //});
-
-            //builder.Services.AddAuthentication("Bearer").AddJwtBearer();
-
+    
             var dfdfd = configuration.GetValue<string>("Authentication:Secret");
 
             builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
